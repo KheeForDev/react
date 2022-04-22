@@ -19,7 +19,7 @@ function App() {
     <div>
       <Header />
       <AddNote onAdd={addNote} />
-      {notes.map((note, index) => 
+      {notes.map((note, index) =>
         <Note
           key={index}
           id={index}
