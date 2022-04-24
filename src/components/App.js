@@ -3,12 +3,24 @@ import Header from './Header';
 import AddNote from './AddNote';
 import Note from './Note';
 import Footer from './Footer';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [notes, setNotes] = useState([]);
 
   const addNote = (note) => {
     setNotes(prevState => [...prevState, note]);
+    toast.success('New note added',
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
   }
 
   const deleteNote = (id) => {
@@ -29,6 +41,8 @@ function App() {
         />
       )}
 
+      {/* // refer to https://bestofreactjs.com/repo/fkhadra-react-toastify-react-notifications */}
+      <ToastContainer />
       <Footer />
     </div>
   );
