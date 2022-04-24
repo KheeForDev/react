@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -25,7 +26,7 @@ function Note(props) {
         <div className="note">
             <h1>{props.title}</h1>
             <p>{props.content}</p>
-            <button onClick={handleOpenDialog}>delete</button>
+            <button onClick={handleOpenDialog}><DeleteIcon /></button>
 
             <Dialog
                 open={isDialogOpen}
@@ -42,10 +43,8 @@ function Note(props) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseDialog}>Cancel</Button>
-                    <Button onClick={handleConfirmDelete} autoFocus>
-                        Confirm
-                    </Button>
+                    <Button variant="contained" color="error" onClick={handleCloseDialog} disableElevation>Cancel</Button>
+                    <Button variant="contained" onClick={handleConfirmDelete} disableElevation>Confirm</Button>
                 </DialogActions>
             </Dialog>
         </div>

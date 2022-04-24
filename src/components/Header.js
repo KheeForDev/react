@@ -1,9 +1,10 @@
 import React from 'react';
+import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 
 function Header() {
     return (
         <header>
-            <h1>Note Keeper</h1>
+            <h1><StickyNote2Icon /> Note Keeper</h1>
         </header>
     );
 }

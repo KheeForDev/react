@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
 
 function AddNote(props) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -29,7 +30,7 @@ function AddNote(props) {
                         content: ""
                     })
                     setIsExpanded(false);
-                }}>Add</button>}
+                }}><AddIcon /></button>}
             </form>
         </div>
     );
