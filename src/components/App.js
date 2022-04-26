@@ -25,6 +25,16 @@ function App() {
 
   const deleteNote = (id) => {
     setNotes(prevState => prevState.filter((note, index) => index !== id));
+    toast.success('Note deleted',
+      {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
   }
 
   return (
