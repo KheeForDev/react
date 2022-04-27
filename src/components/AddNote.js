@@ -16,9 +16,7 @@ function AddNote(props) {
         setNote(prevState => ({ ...prevState, [name]: value }));
     }
 
-    const expand = () => {
-        setIsExpanded(true);
-    }
+    const expand = () => setIsExpanded(true);
 
     const handleKeyUp = (e) => {
         const counterElement = document.getElementById("lengthCounter")
