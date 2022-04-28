@@ -14,7 +14,12 @@ function Note(props) {
     const handleCloseDeleteDialog = () => setIsDeleteDialogOpen(false);
     const handleOpenEditDialog = () => setIsEditDialogOpen(true);
     const handleCloseEditDialog = () => setIsEditDialogOpen(false);
-    const handleConfirmDelete = () => props.onDelete(props.id);
+    
+    const handleConfirmDelete = () => {
+        props.onDelete(props.id);
+        handleCloseDeleteDialog();
+    }
+    
     const handleConfirmEdit = () => {
         props.onUpdate(props.id, updatedNote);
         handleCloseEditDialog();
