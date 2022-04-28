@@ -5,6 +5,7 @@ import Note from './Note';
 import Footer from './Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -25,7 +26,7 @@ function App() {
 
   const deleteNote = (id) => {
     setNotes(prevState => prevState.filter((note, index) => index !== id));
-    toast.success('Note deleted',
+    toast.error('Note deleted',
       {
         position: "bottom-right",
         autoClose: 5000,
@@ -41,15 +42,17 @@ function App() {
     <div>
       <Header />
       <AddNote onAdd={addNote} />
-      {notes.map((note, index) =>
-        <Note
-          key={index}
-          id={index}
-          title={note.title}
-          content={note.content}
-          onDelete={deleteNote}
-        />
-      )}
+      <div className="flex-container">
+        {notes.map((note, index) =>
+          <Note
+            key={index}
+            id={index}
+            title={note.title}
+            content={note.content}
+            onDelete={deleteNote}
+          />
+        )}
+      </div>
 
       {/* // refer to https://bestofreactjs.com/repo/fkhadra-react-toastify-react-notifications */}
       <ToastContainer />

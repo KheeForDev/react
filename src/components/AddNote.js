@@ -30,7 +30,7 @@ function AddNote(props) {
     }
 
     return (
-        <div>
+        <div  className="add-note">
             <form>
                 {isExpanded && <input name="title" placeholder="Title (Optional)" onChange={handleChange} value={note.title} maxLength={maxLengthTitle} />}
                 <textarea name="content" placeholder="Take a note..." rows={isExpanded ? 3 : 1} onClick={expand} onChange={handleChange} onKeyUp={handleKeyUp} value={note.content} maxLength={maxLengthContent} />

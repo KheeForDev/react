@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
+import Card from 'react-bootstrap/Card';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Modal, Button } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button, Form } from "react-bootstrap";
 
 function Note(props) {
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const handleOpenDialog = () => setIsDialogOpen(true);
-    const handleCloseDialog = () => setIsDialogOpen(false);
+    const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+    const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+    const handleOpenDeleteDialog = () => setIsDeleteDialogOpen(true);
+    const handleCloseDeleteDialog = () => setIsDeleteDialogOpen(false);
+    const handleOpenEditDialog = () => setIsEditDialogOpen(true);
+    const handleCloseEditDialog = () => setIsEditDialogOpen(false);
     const handleConfirmDelete = () => props.onDelete(props.id);
+    const handleConfirmEdit = () => console.log(props.id);
 
     return (
-        <div className="note">
-            <h1>{props.title}</h1>
-            <p>{props.content}</p>
-            <button onClick={handleOpenDialog}><DeleteIcon /></button>
+        <>
+            <Card className="m-2" style={{ borderColor: "red", width: '18rem' }}>
+                <Card.Body>
+                    <Card.Title>{props.title}</Card.Title>
+                    <Card.Text>
+                        {props.content}
+                    </Card.Text>
+                    <p className="create-timestamp">Created On: 2022-04-28 12:00</p>
+                    <button className="delete" onClick={handleOpenDeleteDialog}><DeleteIcon /></button>
+                    <button className="edit" onClick={handleOpenEditDialog}><EditIcon /></button>
+                </Card.Body>
+            </Card>
 
-            <Modal show={isDialogOpen} onHide={handleCloseDialog} size="md  " centered>
+            <Modal show={isDeleteDialogOpen} onHide={handleCloseDeleteDialog} size="md" centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete Confirmation</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>Are you sure you want to delete this note?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseDialog}>
+                    <Button variant="secondary" onClick={handleCloseDeleteDialog}>
                         Close
                     </Button>
                     <Button variant="danger" onClick={handleConfirmDelete}>
@@ -29,7 +42,33 @@ function Note(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+
+            <Modal show={isEditDialogOpen} onHide={handleCloseEditDialog} size="md" backdrop="static" keyboard={false} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Update Note</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Title (Optional)</Form.Label>
+                            <Form.Control autoFocus />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Content</Form.Label>
+                            <Form.Control as="textarea" rows={3} />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleCloseEditDialog}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleConfirmEdit}>
+                        Update
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
     )
 };
 
