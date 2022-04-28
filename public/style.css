@@ -36,7 +36,8 @@ form textarea {
   resize: none;
 }
 
-.add-note form p {
+.add-note form p,
+.modal-dialog p {
   font-size: 12px;
   text-align: right;
   margin-bottom: 15px;
