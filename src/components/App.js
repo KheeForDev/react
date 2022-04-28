@@ -24,6 +24,12 @@ function App() {
       })
   }
 
+  const updateNote = (id, note) => {
+    // Object destructuring to select required key only
+    const updatedNote = (({ title, content }) => ({ title, content }))(note);
+    setNotes(prevState => prevState.map((note, index) => index === id ? { ...note, ...updatedNote } : note));
+  }
+
   const deleteNote = (id) => {
     setNotes(prevState => prevState.filter((note, index) => index !== id));
     toast.error('Note deleted',
@@ -50,11 +56,12 @@ function App() {
             title={note.title}
             content={note.content}
             onDelete={deleteNote}
+            onUpdate={updateNote}
           />
         )}
       </div>
 
-      {/* // refer to https://bestofreactjs.com/repo/fkhadra-react-toastify-react-notifications */}
+      {/* refer to https://bestofreactjs.com/repo/fkhadra-react-toastify-react-notifications */}
       <ToastContainer />
       <Footer />
     </div>

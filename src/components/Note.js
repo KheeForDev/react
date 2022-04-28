@@ -5,6 +5,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Modal, Button, Form } from "react-bootstrap";
 
 function Note(props) {
+    const maxLengthTitle = 50;
+    const maxLengthContent = 200;
+    const [updatedNote, setUpdatedNote] = useState(props);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const handleOpenDeleteDialog = () => setIsDeleteDialogOpen(true);
@@ -12,7 +15,26 @@ function Note(props) {
     const handleOpenEditDialog = () => setIsEditDialogOpen(true);
     const handleCloseEditDialog = () => setIsEditDialogOpen(false);
     const handleConfirmDelete = () => props.onDelete(props.id);
-    const handleConfirmEdit = () => console.log(props.id);
+    const handleConfirmEdit = () => {
+        props.onUpdate(props.id, updatedNote);
+        handleCloseEditDialog();
+    }
+    
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUpdatedNote(prevState => ({ ...prevState, [name]: value }));
+    }
+
+    const handleKeyUp = (e) => {
+        const counterElement = document.getElementById("lengthCounter")
+        counterElement.innerHTML = maxLengthContent - e.target.value.length;
+
+        if (e.target.value.length > 0) {
+            document.getElementById("btnUpdate").disabled = false;
+        } else {
+            document.getElementById("btnUpdate").disabled = true;
+        }
+    }
 
     return (
         <>
@@ -51,19 +73,20 @@ function Note(props) {
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Title (Optional)</Form.Label>
-                            <Form.Control autoFocus />
+                            <input className="form-control" name="title" placeholder="Title (Optional)" onChange={handleChange} value={updatedNote.title} maxLength={maxLengthTitle} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Content</Form.Label>
-                            <Form.Control as="textarea" rows={3} />
+                            <textarea className="form-control" name="content" placeholder="Take a note..." rows="3" onChange={handleChange} onKeyUp={handleKeyUp} value={updatedNote.content} maxLength={maxLengthContent} />
                         </Form.Group>
+                        <p>Characters left: <span id="lengthCounter">{maxLengthContent}</span></p>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseEditDialog}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleConfirmEdit}>
+                    <Button variant="primary" onClick={handleConfirmEdit} id="btnUpdate">
                         Update
                     </Button>
                 </Modal.Footer>
