@@ -54,7 +54,7 @@ function AddNote(props) {
                 </Form.Group>
                 <Form.Group className="mb-3">
                     {isExpanded && <Form.Select aria-label="Default select example" name="color" onChange={handleChange} value={note.color}>
-                        <option value="#fff">Select color for note (By default is white)</option>
+                        <option value="#fff">White</option>
                         <option value="#f6c2d9">Pink</option>
                         <option value="#fff69b">Yellow</option>
                         <option value="#bcdfc9">Green</option>
