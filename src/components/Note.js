@@ -43,7 +43,7 @@ function Note(props) {
 
     return (
         <>
-            <Card className="m-2" style={{ borderColor: "red", width: '18rem' }}>
+            <Card className="m-2" style={{ backgroundColor: props.color, width: '18rem' }}>
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>
                     <Card.Text>

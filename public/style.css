@@ -27,13 +27,17 @@ header h1 {
 }
 
 .add-note form input,
-form textarea {
+.add-note form textarea {
   width: 100%;
   border: none;
   padding: 4px;
   outline: none;
   font-size: 1.2em;
   resize: none;
+}
+
+.add-note form select {
+  margin-bottom: 20px;
 }
 
 .add-note form p,

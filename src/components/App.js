@@ -65,6 +65,7 @@ function App() {
             id={index}
             title={note.title}
             content={note.content}
+            color={note.color}
             onDelete={deleteNote}
             onUpdate={updateNote}
           />
