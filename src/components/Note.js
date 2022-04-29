@@ -14,17 +14,17 @@ function Note(props) {
     const handleCloseDeleteDialog = () => setIsDeleteDialogOpen(false);
     const handleOpenEditDialog = () => setIsEditDialogOpen(true);
     const handleCloseEditDialog = () => setIsEditDialogOpen(false);
-    
+
     const handleConfirmDelete = () => {
         props.onDelete(props.id);
         handleCloseDeleteDialog();
     }
-    
+
     const handleConfirmEdit = () => {
         props.onUpdate(props.id, updatedNote);
         handleCloseEditDialog();
     }
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUpdatedNote(prevState => ({ ...prevState, [name]: value }));
@@ -76,15 +76,15 @@ function Note(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        <Form.Group className="mb-3">
                             <Form.Label>Title (Optional)</Form.Label>
                             <input className="form-control" name="title" placeholder="Title (Optional)" onChange={handleChange} value={updatedNote.title} maxLength={maxLengthTitle} />
                         </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Group className="mb-3">
                             <Form.Label>Content</Form.Label>
-                            <textarea className="form-control" name="content" placeholder="Take a note..." rows="3" onChange={handleChange} onKeyUp={handleKeyUp} value={updatedNote.content} maxLength={maxLengthContent} />
+                            <textarea className="form-control" style={{ resize: "none" }} name="content" placeholder="Take a note..." rows="3" onChange={handleChange} onKeyUp={handleKeyUp} value={updatedNote.content} maxLength={maxLengthContent} />
+                            <p>Characters left: <span id="lengthCounter">{maxLengthContent}</span></p>
                         </Form.Group>
-                        <p>Characters left: <span id="lengthCounter">{maxLengthContent}</span></p>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

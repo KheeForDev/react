@@ -21,23 +21,9 @@ header h1 {
   width: 480px;
   margin: 20px auto 20px auto;
   background: #fff;
-  padding: 15px;
+  padding: 15px 15px 30px 15px;
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
-}
-
-.add-note form input,
-.add-note form textarea {
-  width: 100%;
-  border: none;
-  padding: 4px;
-  outline: none;
-  font-size: 1.2em;
-  resize: none;
-}
-
-.add-note form select {
-  margin-bottom: 20px;
 }
 
 .add-note form p,
@@ -82,10 +68,10 @@ header h1 {
 
 .card .card-body button {
   position: relative;
-  background-color: #fff;
+  background-color: transparent;
   float: right;
   /* margin-right: 10px; */
-  color: #b2beb5;
+  color: #000;
   border: none;
   width: 36px;
   height: 36px;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
-import Form from "react-bootstrap/Form";
+import { Form } from "react-bootstrap";
 
 function AddNote(props) {
     const maxLengthTitle = 50;
@@ -31,12 +31,29 @@ function AddNote(props) {
         }
     }
 
+    const handleAddNote = (e) => {
+        e.preventDefault();
+        props.onAdd(note);
+        setNote({
+            title: "",
+            content: ""
+        })
+        setIsExpanded(false);
+        setIsDisplay(false);
+    }
+
     return (
         <div className="add-note">
-            <form>
-                {isExpanded && <input name="title" placeholder="Title (Optional)" onChange={handleChange} value={note.title} maxLength={maxLengthTitle} />}
-                <textarea name="content" placeholder="Take a note..." rows={isExpanded ? 3 : 1} onClick={expand} onChange={handleChange} onKeyUp={handleKeyUp} value={note.content} maxLength={maxLengthContent} />
-                {isExpanded && <p>Characters left: <span id="lengthCounter">{maxLengthContent}</span></p>}
+            <Form>
+                <Form.Group className="mb-3">
+                    {isExpanded && <input className="form-control" name="title" placeholder="Title (Optional)" onChange={handleChange} value={note.title} maxLength={maxLengthTitle} />}
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <textarea className="form-control" style={{ resize: "none" }} name="content" placeholder="Take a note..." rows={isExpanded ? 3 : 1} onClick={expand} onChange={handleChange} onKeyUp={handleKeyUp} value={note.content} maxLength={maxLengthContent} />
+                    {isExpanded && <p>Characters left: <span id="lengthCounter">{maxLengthContent}</span></p>}
+                </Form.Group>
+
                 {isExpanded && <Form.Select aria-label="Default select example" name="color" onChange={handleChange} value={note.color}>
                     <option value="#fff">Select color for note (By default is white)</option>
                     <option value="#f6c2d9">Pink</option>
@@ -45,17 +62,9 @@ function AddNote(props) {
                     <option value="#a1c8e9">Blue</option>
                     <option value="#e4dae2">Purple</option>
                 </Form.Select>}
-                {isDisplay && <button onClick={(e) => {
-                    e.preventDefault();
-                    props.onAdd(note);
-                    setNote({
-                        title: "",
-                        content: ""
-                    })
-                    setIsExpanded(false);
-                    setIsDisplay(false);
-                }}><AddIcon /></button>}
-            </form>
+
+                {isDisplay && <button onClick={handleAddNote}><AddIcon /></button>}
+            </Form>
         </div>
     );
 }
