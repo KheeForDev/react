@@ -5,9 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class NoteKeeperController {
-	
 	@GetMapping("/test")
-	public String getAllStudents() {
+	public String getAllNote() {
 		return "Hello World";
 	}
 }
