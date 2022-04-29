@@ -26,7 +26,7 @@ function App() {
 
   const updateNote = (id, note) => {
     // Object destructuring to select required key only
-    const updatedNote = (({ title, content }) => ({ title, content }))(note);
+    const updatedNote = (({ title, content, color }) => ({ title, content, color }))(note);
     setNotes(prevState => prevState.map((note, index) => index === id ? { ...note, ...updatedNote } : note));
     toast.success('Note updated',
       {

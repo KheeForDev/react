@@ -85,6 +85,16 @@ function Note(props) {
                             <textarea className="form-control" style={{ resize: "none" }} name="content" placeholder="Take a note..." rows="3" onChange={handleChange} onKeyUp={handleKeyUp} value={updatedNote.content} maxLength={maxLengthContent} />
                             <p>Characters left: <span id="lengthCounter">{maxLengthContent}</span></p>
                         </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Select aria-label="Default select example" name="color" onChange={handleChange} value={updatedNote.color}>
+                                <option value="#fff">Select color for note (By default is white)</option>
+                                <option value="#f6c2d9">Pink</option>
+                                <option value="#fff69b">Yellow</option>
+                                <option value="#bcdfc9">Green</option>
+                                <option value="#a1c8e9">Blue</option>
+                                <option value="#e4dae2">Purple</option>
+                            </Form.Select>
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
