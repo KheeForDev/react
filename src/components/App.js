@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import AddNote from './AddNote';
 import Note from './Note';
@@ -6,9 +6,26 @@ import Footer from './Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from '../utils/axios';
 
 function App() {
   const [notes, setNotes] = useState([]);
+
+  // if [], only run once when page load
+  // if [state], will run when state change
+  useEffect(() => {
+    async function getAllNote() {
+      try {
+        const request = await axios.get("/note/getAll");
+        console.log(request);
+        setNotes(request.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getAllNote()
+  }, [])
 
   const addNote = (note) => {
     setNotes(prevState => [...prevState, note]);
@@ -25,7 +42,7 @@ function App() {
   }
 
   const updateNote = (id, note) => {
-    // Object destructuring to select required key only
+    // object destructuring to select required key only
     const updatedNote = (({ title, content, color }) => ({ title, content, color }))(note);
     setNotes(prevState => prevState.map((note, index) => index === id ? { ...note, ...updatedNote } : note));
     toast.success('Note updated',
