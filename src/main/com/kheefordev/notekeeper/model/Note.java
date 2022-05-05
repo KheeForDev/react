@@ -15,8 +15,8 @@ public class Note {
 	private String title;
 	private String content;
 	private String color;
-	private Timestamp createdOn;
 	private String createdBy;
+	private Timestamp createdOn;
 
 	public int getId() {
 		return id;
@@ -50,19 +50,19 @@ public class Note {
 		this.color = color;
 	}
 
-	public Timestamp getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(Timestamp createdOn) {
-		this.createdOn = createdOn;
-	}
-
 	public String getCreatedBy() {
 		return createdBy;
 	}
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public Timestamp getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Timestamp createdOn) {
+		this.createdOn = createdOn;
 	}
 }

@@ -18,4 +18,24 @@ public class NoteServiceImpl implements NoteService {
 	public List<Note> getAllNote() {
 		return noteRespository.findAll();
 	}
+
+	@Override
+	public Note addNote(Note note) {
+		return noteRespository.save(note);
+	}
+
+	@Override
+	public Note getNote(int id) {
+		return null;
+	}
+
+	@Override
+	public Note deleteNote(int id) {
+		return null;
+	}
+
+	@Override
+	public Note updateNote(Note student) {
+		return null;
+	}
 }

@@ -1,12 +1,18 @@
 package com.kheefordev.notekeeper.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,5 +42,31 @@ public class NoteKeeperController {
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
+	
+	@PostMapping("/add")
+	public String addNote(@RequestBody Note note) throws JsonProcessingException {
+		note.setCreatedBy("User");
+		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+		noteService.addNote(note);
+		return "New note added";
+	}
+	
+	@GetMapping("/get/{id}")
+	public Note getNote(@PathVariable(value = "id") int id) {
+		return noteService.getNote(id);
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public String deleteNote(@PathVariable(value = "id") int id) {
+		noteService.deleteNote(id);
+		return "Note deleted";
+	}
+
+	@PutMapping("/update/{id}")
+	public String updateNote(@PathVariable(value = "id") int id, @RequestBody Note note) {
+		note.setId(id);
+		noteService.updateNote(note);
+		return "Note updated";
 	}
 }
