@@ -45,18 +45,8 @@ public class NoteKeeperController {
 
 	@PostMapping("/add")
 	public ResponseEntity<String> addNote(@RequestBody Note note) {
-		ObjectMapper mapper = new ObjectMapper();
-
-		try {
-			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(note));
-
-			note.setCreatedBy("User");
-			note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
-
-			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(note));
-		} catch (JsonProcessingException e) {
-			System.out.println(e.getMessage());
-		}
+		note.setCreatedBy("User");
+		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 
 		noteService.addNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("New note added");
@@ -75,7 +65,9 @@ public class NoteKeeperController {
 
 	@PostMapping("/update")
 	public ResponseEntity<String> updateNote(@RequestBody Note note) {
+		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+
 		noteService.updateNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("Note updated");
 	}
