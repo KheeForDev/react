@@ -73,10 +73,8 @@ public class NoteKeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
 	}
 
-	@PostMapping("/update/{id}")
-	public ResponseEntity<String> updateNote(@PathVariable(value = "id") int id, @RequestBody Note note) {
-		note.setId(id);
-		note.setCreatedBy("User");
+	@PostMapping("/update")
+	public ResponseEntity<String> updateNote(@RequestBody Note note) {
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 		noteService.updateNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("Note updated");
