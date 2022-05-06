@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,30 +42,43 @@ public class NoteKeeperController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
-	
+
 	@PostMapping("/add")
-	public String addNote(@RequestBody Note note) throws JsonProcessingException {
-		note.setCreatedBy("User");
-		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+	public ResponseEntity<String> addNote(@RequestBody Note note) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(note));
+
+			note.setCreatedBy("User");
+			note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+
+			System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(note));
+		} catch (JsonProcessingException e) {
+			System.out.println(e.getMessage());
+		}
+
 		noteService.addNote(note);
-		return "New note added";
+		return ResponseEntity.status(HttpStatus.OK).body("New note added");
 	}
-	
-	@GetMapping("/get/{id}")
-	public Note getNote(@PathVariable(value = "id") int id) {
-		return noteService.getNote(id);
-	}
+
+//	@GetMapping("/get/{id}")
+//	public Note getNote(@PathVariable(value = "id") int id) {
+//		return noteService.getNote(id);
+//	}
 
 	@DeleteMapping("/delete/{id}")
-	public String deleteNote(@PathVariable(value = "id") int id) {
+	public ResponseEntity<String> deleteNote(@PathVariable(value = "id") int id) {
 		noteService.deleteNote(id);
-		return "Note deleted";
+		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
 	}
 
-	@PutMapping("/update/{id}")
-	public String updateNote(@PathVariable(value = "id") int id, @RequestBody Note note) {
+	@PostMapping("/update/{id}")
+	public ResponseEntity<String> updateNote(@PathVariable(value = "id") int id, @RequestBody Note note) {
 		note.setId(id);
+		note.setCreatedBy("User");
+		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 		noteService.updateNote(note);
-		return "Note updated";
+		return ResponseEntity.status(HttpStatus.OK).body("Note updated");
 	}
 }
