@@ -1,97 +1,160 @@
-import React, { useState, useEffect } from 'react';
-import Header from './Header';
-import AddNote from './AddNote';
-import Note from './Note';
-import Footer from './Footer';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from '../utils/axios';
+import React, { useState, useEffect } from "react";
+import Header from "./Header";
+import AddNote from "./AddNote";
+import Note from "./Note";
+import Footer from "./Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "../utils/axios";
 
 function App() {
   const [notes, setNotes] = useState([]);
 
-  // if [], only run once when page load
-  // if [state], will run when state change
-  useEffect(() => {
-    async function getAllNote() {
-      try {
-        const request = await axios.get("/note/getAll");
-        console.log(request);
-        setNotes(request.data);
-      } catch (err) {
-        console.log(err);
-      }
+  const getAllNote = async () => {
+    console.log("run getAllNote function");
+
+    try {
+      const request = await axios.get("/note/getAll");
+      console.log(request);
+      setNotes(request.data);
+    } catch (err) {
+      console.log(err);
+      const { message } = err;
+
+      toast.error(message, {
+        autoClose: false,
+      });
     }
+  };
 
-    getAllNote()
-  }, [])
+  // if [], only run once when page load
+  // if [dependencies], will run if any value inside dependencies has changed
+  useEffect(() => {
+    console.log("invoke useEffect to run getAllNote function");
+    getAllNote();
+  }, []);
 
-  const addNote = (note) => {
-    setNotes(prevState => [...prevState, note]);
-    toast.success('New note added',
-      {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
-  }
+  const addNote = async (note) => {
+    console.log("run addNote function");
+    // setNotes((prevState) => [...prevState, note]);
 
-  const updateNote = (id, note) => {
+    try {
+      const request = await axios.post("/note/add", note);
+      console.log(request);
+      const { data: message, status: statusCode } = request;
+
+      if (statusCode === 200) {
+        toast.success(message, {
+          autoClose: 5000,
+        });
+
+        getAllNote();
+      }
+    } catch (err) {
+      console.log(err);
+      const { message } = err;
+
+      toast.error(message, {
+        autoClose: false,
+      });
+    }
+  };
+
+  const deleteNote = async (id) => {
+    console.log("run deleteNote function");
+    // setNotes((prevState) => prevState.filter((note, index) => index !== id));
+
+    try {
+      const request = await axios.delete(`/note/delete/${id}`);
+      console.log(request);
+      const { data: message, status: statusCode } = request;
+
+      if (statusCode === 200) {
+        toast.success(message, {
+          autoClose: 5000,
+        });
+
+        getAllNote();
+      }
+    } catch (err) {
+      console.log(err);
+      const { message } = err;
+
+      toast.error(message, {
+        autoClose: false,
+      });
+    }
+  };
+
+  const updateNote = async (note) => {
+    console.log("run updateNote function");
     // object destructuring to select required key only
-    const updatedNote = (({ title, content, color }) => ({ title, content, color }))(note);
-    setNotes(prevState => prevState.map((note, index) => index === id ? { ...note, ...updatedNote } : note));
-    toast.success('Note updated',
-      {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
-  }
+    // const updatedNote = (({ title, content, color }) => ({
+    //   title,
+    //   content,
+    //   color,
+    // }))(note);
 
-  const deleteNote = (id) => {
-    setNotes(prevState => prevState.filter((note, index) => index !== id));
-    toast.error('Note deleted',
-      {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
-  }
+    // setNotes((prevState) =>
+    //   prevState.map((note, index) =>
+    //     index === id ? { ...note, ...updatedNote } : note
+    //   )
+    // );
+
+    try {
+      const request = await axios.post("/note/update", note);
+      console.log(request);
+      const { data: message, status: statusCode } = request;
+
+      if (statusCode === 200) {
+        toast.success(message, {
+          autoClose: 5000,
+        });
+
+        getAllNote();
+      }
+    } catch (err) {
+      console.log(err);
+      const { message } = err;
+
+      toast.error(message, {
+        autoClose: false,
+      });
+    }
+  };
 
   return (
     <div>
       <Header />
       <AddNote onAdd={addNote} />
       <div className="flex-container">
-        {notes.map((note, index) =>
+        {notes.map((note) => (
           <Note
-            key={index}
-            id={index}
+            key={note.id}
+            id={note.id}
             title={note.title}
             content={note.content}
             color={note.color}
+            createdOn={note.createdOn}
             onDelete={deleteNote}
             onUpdate={updateNote}
           />
-        )}
+        ))}
       </div>
+      <Footer />
 
       {/* refer to https://bestofreactjs.com/repo/fkhadra-react-toastify-react-notifications */}
-      <ToastContainer />
-      <Footer />
+      <ToastContainer
+        position="bottom-right"
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

@@ -10,7 +10,7 @@ function AddNote(props) {
     const [note, setNote] = useState({
         title: "",
         content: "",
-        color: ""
+        color: "#fff"
     });
 
     const handleChange = (e) => {
@@ -36,7 +36,8 @@ function AddNote(props) {
         props.onAdd(note);
         setNote({
             title: "",
-            content: ""
+            content: "",
+            color:"#fff"
         })
         setIsExpanded(false);
         setIsDisplay(false);

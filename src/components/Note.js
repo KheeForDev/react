@@ -21,7 +21,7 @@ function Note(props) {
     }
 
     const handleConfirmEdit = () => {
-        props.onUpdate(props.id, updatedNote);
+        props.onUpdate(updatedNote);
         handleCloseEditDialog();
     }
 
@@ -49,7 +49,7 @@ function Note(props) {
                     <Card.Text>
                         {props.content}
                     </Card.Text>
-                    <p className="create-timestamp">Created On: 2022-04-28 12:00</p>
+                    <p className="create-timestamp">Created On: {props.createdOn}</p>
                     <button className="delete" onClick={handleOpenDeleteDialog}><DeleteIcon /></button>
                     <button className="edit" onClick={handleOpenEditDialog}><EditIcon /></button>
                 </Card.Body>
