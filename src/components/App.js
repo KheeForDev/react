@@ -10,14 +10,32 @@ import axios from "../utils/axios";
 
 function App() {
   const [notes, setNotes] = useState([]);
+  const [colors, setColors] = useState([]);
 
   const getAllNote = async () => {
     console.log("run getAllNote function");
 
     try {
-      const request = await axios.get("/note/getAll");
-      console.log(request);
-      setNotes(request.data);
+      const response = await axios.get("/note/getAll");
+      console.log(response);
+      setNotes(response.data);
+    } catch (err) {
+      console.log(err);
+      const { message } = err;
+
+      toast.error(message, {
+        autoClose: false,
+      });
+    }
+  };
+
+  const getAllColorCode = async () => {
+    console.log("run getAllColorCode function");
+
+    try {
+      const response = await axios.get("/colorCode/getAll");
+      console.log(response);
+      setColors(response.data);
     } catch (err) {
       console.log(err);
       const { message } = err;
@@ -31,8 +49,9 @@ function App() {
   // if [], only run once when page load
   // if [dependencies], will run if any value inside dependencies has changed
   useEffect(() => {
-    console.log("invoke useEffect to run getAllNote function");
+    console.log("invoke useEffect to run required functions");
     getAllNote();
+    getAllColorCode();
   }, []);
 
   const addNote = async (note) => {
@@ -127,7 +146,7 @@ function App() {
   return (
     <div>
       <Header />
-      <AddNote onAdd={addNote} />
+      <AddNote onAdd={addNote} colors={colors} />
       <div className="flex-container">
         {notes.map((note) => (
           <Note
@@ -137,6 +156,7 @@ function App() {
             content={note.content}
             color={note.color}
             createdOn={note.createdOn}
+            colors={colors}
             onDelete={deleteNote}
             onUpdate={updateNote}
           />

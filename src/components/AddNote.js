@@ -55,12 +55,10 @@ function AddNote(props) {
                 </Form.Group>
                 <Form.Group className="mb-3">
                     {isExpanded && <Form.Select aria-label="Default select example" name="color" onChange={handleChange} value={note.color}>
-                        <option value="#fff">White</option>
-                        <option value="#f6c2d9">Pink</option>
-                        <option value="#fff69b">Yellow</option>
-                        <option value="#bcdfc9">Green</option>
-                        <option value="#a1c8e9">Blue</option>
-                        <option value="#e4dae2">Purple</option>
+                        {props.colors.map(item => {
+                            return (<option key={item.color_value} value={item.color_value}>{item.color_name}</option>);
+                            }
+                        )}
                     </Form.Select>}
                 </Form.Group>
                 {isDisplay && <button onClick={handleAddNote}><AddIcon /></button>}

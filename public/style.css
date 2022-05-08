@@ -30,7 +30,7 @@ header h1 {
 .modal-dialog p {
   font-size: 12px;
   text-align: right;
-  margin-bottom: 15px;
+  margin: 5px 0px 15px 0px;
 }
 
 .add-note form button {
