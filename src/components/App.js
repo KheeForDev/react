@@ -155,6 +155,7 @@ function App() {
             title={note.title}
             content={note.content}
             color={note.color}
+            createdBy={note.createdBy}
             createdOn={note.createdOn}
             colors={colors}
             onDelete={deleteNote}

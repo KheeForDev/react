@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Modal, Button, Form } from "react-bootstrap";
+import { epochToTimestamp } from "../utils/date";
 
 function Note(props) {
     const maxLengthTitle = 50;
@@ -49,9 +50,9 @@ function Note(props) {
                     <Card.Text>
                         {props.content}
                     </Card.Text>
-                    <p className="create-timestamp">Created On: {props.createdOn}</p>
-                    <button className="delete" onClick={handleOpenDeleteDialog}><DeleteIcon /></button>
-                    <button className="edit" onClick={handleOpenEditDialog}><EditIcon /></button>
+                    <p className="create-timestamp">Created On: {epochToTimestamp(props.createdOn)}</p>
+                    {updatedNote.createdBy !== "Admin" && <button className="delete" onClick={handleOpenDeleteDialog}><DeleteIcon /></button>}
+                    {updatedNote.createdBy !== "Admin" &&<button className="edit" onClick={handleOpenEditDialog}><EditIcon /></button>}
                 </Card.Body>
             </Card>
 
