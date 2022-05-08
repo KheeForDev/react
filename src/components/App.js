@@ -59,9 +59,9 @@ function App() {
     // setNotes((prevState) => [...prevState, note]);
 
     try {
-      const request = await axios.post("/note/add", note);
-      console.log(request);
-      const { data: message, status: statusCode } = request;
+      const response = await axios.post("/note/add", note);
+      console.log(response);
+      const { data: message, status: statusCode } = response;
 
       if (statusCode === 200) {
         toast.success(message, {
@@ -72,9 +72,9 @@ function App() {
       }
     } catch (err) {
       console.log(err);
-      const { message } = err;
+      const { message, response } = err;
 
-      toast.error(message, {
+      toast.error(<div>{message}<br /> {response.data}</div>, {
         autoClose: false,
       });
     }
@@ -85,9 +85,9 @@ function App() {
     // setNotes((prevState) => prevState.filter((note, index) => index !== id));
 
     try {
-      const request = await axios.delete(`/note/delete/${id}`);
-      console.log(request);
-      const { data: message, status: statusCode } = request;
+      const response = await axios.delete(`/note/delete/${id}`);
+      console.log(response);
+      const { data: message, status: statusCode } = response;
 
       if (statusCode === 200) {
         toast.success(message, {
@@ -122,9 +122,9 @@ function App() {
     // );
 
     try {
-      const request = await axios.post("/note/update", note);
-      console.log(request);
-      const { data: message, status: statusCode } = request;
+      const response = await axios.post("/note/update", note);
+      console.log(response);
+      const { data: message, status: statusCode } = response;
 
       if (statusCode === 200) {
         toast.success(message, {
