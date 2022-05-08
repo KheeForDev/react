@@ -62,12 +62,22 @@ public class NoteKeeperController {
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteNote(@PathVariable(value = "id") int id) {
-		noteService.deleteNote(id);
+		Note note = noteService.getNoteById(id);
+		
+		if (note == null)
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Note does not exist");
+		
+		noteService.deleteNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
 	}
 
 	@PostMapping("/update")
 	public ResponseEntity<String> updateNote(@RequestBody Note note) {
+		Note existNote = noteService.getNoteById(note.getId());
+		
+		if (existNote == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to update as note does not exist");
+		
 		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 

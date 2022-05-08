@@ -25,14 +25,13 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	@Override
-	public Note getNote(int id) {
+	public Note getNoteById(int id) {
 		Note note = noteRespository.getReferenceById(id);
 		return note;
 	}
 
 	@Override
-	public Note deleteNote(int id) {
-		Note note = getNote(id);
+	public Note deleteNote(Note note) {
 		noteRespository.delete(note);
 		return note;
 	}
