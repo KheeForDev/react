@@ -45,6 +45,9 @@ public class NoteKeeperController {
 
 	@PostMapping("/add")
 	public ResponseEntity<String> addNote(@RequestBody Note note) {
+		if (note.getContent().length() > 200)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Note content exceeded limit of 200 characters");
+
 		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 
