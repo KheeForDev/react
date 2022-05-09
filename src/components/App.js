@@ -61,15 +61,12 @@ function App() {
     try {
       const response = await axios.post("/note/add", note);
       console.log(response);
-      const { data: message, status: statusCode } = response;
+      const { data: message } = response;
 
-      if (statusCode === 200) {
-        toast.success(message, {
-          autoClose: 5000,
-        });
-
-        getAllNote();
-      }
+      toast.success(message, {
+        autoClose: 5000,
+      });
+      getAllNote();
     } catch (err) {
       console.log(err);
       const { message, response } = err;
@@ -87,15 +84,12 @@ function App() {
     try {
       const response = await axios.delete(`/note/delete/${id}`);
       console.log(response);
-      const { data: message, status: statusCode } = response;
+      const { data: message } = response;
 
-      if (statusCode === 200) {
-        toast.success(message, {
-          autoClose: 5000,
-        });
-
-        getAllNote();
-      }
+      toast.success(message, {
+        autoClose: 5000,
+      });
+      getAllNote();
     } catch (err) {
       console.log(err);
       const { message } = err;
@@ -124,20 +118,17 @@ function App() {
     try {
       const response = await axios.post("/note/update", note);
       console.log(response);
-      const { data: message, status: statusCode } = response;
+      const { data: message } = response;
 
-      if (statusCode === 200) {
-        toast.success(message, {
-          autoClose: 5000,
-        });
-
-        getAllNote();
-      }
+      toast.success(message, {
+        autoClose: 5000,
+      });              
+      getAllNote();
     } catch (err) {
       console.log(err);
-      const { message } = err;
+      const { message, response } = err;
 
-      toast.error(message, {
+      toast.error(<div>{message}<br /> {response.data}</div>, {
         autoClose: false,
       });
     }
