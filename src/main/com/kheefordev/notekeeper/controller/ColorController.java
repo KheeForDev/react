@@ -12,25 +12,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kheefordev.notekeeper.model.ColorCode;
-import com.kheefordev.notekeeper.service.ColorCodeService;
+import com.kheefordev.notekeeper.model.Color;
+import com.kheefordev.notekeeper.service.ColorService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/colorCode")
-public class ColorCodeController {
+@RequestMapping("/color")
+public class ColorController {
 
 	@Autowired
-	private ColorCodeService colorCodeService;
+	private ColorService colorService;
 
 	@GetMapping("/getAll")
-	public ResponseEntity<String> getAllColorCode() {
+	public ResponseEntity<String> getAllColor() {
 		String result = "";
 		ObjectMapper mapper = new ObjectMapper();
-		List<ColorCode> colorCodes = colorCodeService.getAllColorCode();
+		List<Color> colors = colorService.getAllColor();
 
 		try {
-			result = mapper.writeValueAsString(colorCodes);
+			result = mapper.writeValueAsString(colors);
 		} catch (JsonProcessingException e) {
 			System.out.println(e.getMessage());
 		}

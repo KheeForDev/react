@@ -1,19 +1,19 @@
-DROP TABLE IF EXISTS heroku_2ee3dca429e41e2.color_code;
+DROP TABLE IF EXISTS heroku_2ee3dca429e41e2.color;
 
-CREATE TABLE IF NOT EXISTS heroku_2ee3dca429e41e2.color_code (
+CREATE TABLE IF NOT EXISTS heroku_2ee3dca429e41e2.color (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	color_name VARCHAR(20) NOT NULL,
 	color_value VARCHAR(10) NOT NULL
 );
 
-INSERT INTO heroku_2ee3dca429e41e2.color_code (color_name, color_value) VALUES ('White', '#fff');
-INSERT INTO heroku_2ee3dca429e41e2.color_code (color_name, color_value) VALUES ('Pink', '#f6c2d9');
-INSERT INTO heroku_2ee3dca429e41e2.color_code (color_name, color_value) VALUES ('Yellow', '#fff69b');
-INSERT INTO heroku_2ee3dca429e41e2.color_code (color_name, color_value) VALUES ('Green', '#bcdfc9');
-INSERT INTO heroku_2ee3dca429e41e2.color_code (color_name, color_value) VALUES ('Blue', '#a1c8e9');
-INSERT INTO heroku_2ee3dca429e41e2.color_code (color_name, color_value) VALUES ('Purple', '#e4dae2');
+INSERT INTO heroku_2ee3dca429e41e2.color (color_name, color_value) VALUES ('White', '#fff');
+INSERT INTO heroku_2ee3dca429e41e2.color (color_name, color_value) VALUES ('Pink', '#f6c2d9');
+INSERT INTO heroku_2ee3dca429e41e2.color (color_name, color_value) VALUES ('Yellow', '#fff69b');
+INSERT INTO heroku_2ee3dca429e41e2.color (color_name, color_value) VALUES ('Green', '#bcdfc9');
+INSERT INTO heroku_2ee3dca429e41e2.color (color_name, color_value) VALUES ('Blue', '#a1c8e9');
+INSERT INTO heroku_2ee3dca429e41e2.color (color_name, color_value) VALUES ('Purple', '#e4dae2');
 
-SELECT * FROM heroku_2ee3dca429e41e2.color_code;
+SELECT * FROM heroku_2ee3dca429e41e2.color;
 
 
 DROP TABLE IF EXISTS heroku_2ee3dca429e41e2.note;
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS heroku_2ee3dca429e41e2.note (
 	title VARCHAR(50) NULL,
 	content VARCHAR(200) NOT NULL,
 	color VARCHAR(10) NOT NULL,
-	created_by VARCHAR(20) NOT NULL
-	created_on TIMESTAMP NOT NULL,
+	created_by VARCHAR(20) NOT NULL,
+	created_on TIMESTAMP NOT NULL
 );
 
 INSERT INTO heroku_2ee3dca429e41e2.note (title, content, color, created_by, created_on) 
