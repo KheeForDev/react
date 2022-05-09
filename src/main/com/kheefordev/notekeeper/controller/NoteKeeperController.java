@@ -65,7 +65,7 @@ public class NoteKeeperController {
 		Note note = noteService.getNoteById(id);
 		
 		if (note == null)
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Note does not exist");
+			return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
 		
 		noteService.deleteNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
