@@ -3,6 +3,8 @@ package com.kheefordev.notekeeper.controller;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import com.kheefordev.notekeeper.service.NoteService;
 @RestController
 @RequestMapping("/note")
 public class NoteKeeperController {
+	private static final Logger log = LogManager.getLogger(NoteKeeperController.class);
 
 	@Autowired
 	private NoteService noteService;
@@ -37,14 +40,24 @@ public class NoteKeeperController {
 		try {
 			result = mapper.writeValueAsString(notes);
 		} catch (JsonProcessingException e) {
-			System.out.println(e.getMessage());
+			log.error("error: {}", e.getMessage());
 		}
+
+		log.info("result: {}", result);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
 	@PostMapping("/add")
 	public ResponseEntity<String> addNote(@RequestBody Note note) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			log.info("note: {}", mapper.writeValueAsString(note));
+		} catch (JsonProcessingException e) {
+			log.error("error: {}", e.getMessage());
+		}
+
 		if (note.getContent().length() > 200)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Note content exceeded limit of 200 characters");
 
@@ -62,22 +75,32 @@ public class NoteKeeperController {
 
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteNote(@PathVariable(value = "id") int id) {
+		log.info("note id: {}", id);
+
 		Note note = noteService.getNoteById(id);
-		
+
 		if (note == null)
 			return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
-		
+
 		noteService.deleteNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
 	}
 
 	@PostMapping("/update")
 	public ResponseEntity<String> updateNote(@RequestBody Note note) {
+		ObjectMapper mapper = new ObjectMapper();
+
+		try {
+			log.info("note: {}", mapper.writeValueAsString(note));
+		} catch (JsonProcessingException e) {
+			log.error("error: {}", e.getMessage());
+		}
+
 		Note existNote = noteService.getNoteById(note.getId());
-		
+
 		if (existNote == null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to update as note does not exist");
-		
+
 		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 

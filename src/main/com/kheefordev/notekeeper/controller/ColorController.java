@@ -2,6 +2,8 @@ package com.kheefordev.notekeeper.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import com.kheefordev.notekeeper.service.ColorService;
 @RestController
 @RequestMapping("/color")
 public class ColorController {
+	private static final Logger log = LogManager.getLogger(ColorController.class);
 
 	@Autowired
 	private ColorService colorService;
@@ -32,8 +35,10 @@ public class ColorController {
 		try {
 			result = mapper.writeValueAsString(colors);
 		} catch (JsonProcessingException e) {
-			System.out.println(e.getMessage());
+			log.error("error: {}", e.getMessage());
 		}
+
+		log.info("result: {}", result);
 
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
