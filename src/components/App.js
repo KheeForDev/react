@@ -33,7 +33,7 @@ function App() {
     console.log("run getAllColorCode function");
 
     try {
-      const response = await axios.get("/colorCode/getAll");
+      const response = await axios.get("/color/getAll");
       console.log(response);
       setColors(response.data);
     } catch (err) {
