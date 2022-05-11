@@ -51,6 +51,7 @@ public class NoteKeeperController {
 	@PostMapping("/add")
 	public ResponseEntity<String> addNote(@RequestBody Note note) {
 		ObjectMapper mapper = new ObjectMapper();
+		StringBuilder sbError = new StringBuilder();
 
 		try {
 			log.info("note: {}", mapper.writeValueAsString(note));
@@ -58,8 +59,23 @@ public class NoteKeeperController {
 			log.error("error: {}", e.getMessage());
 		}
 
-		if (note.getContent().length() > 200)
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Note content exceeded limit of 200 characters");
+		if (note.getContent().length() == 0) {
+			sbError.append("Note content cannot be empty");
+			sbError.append(System.getProperty("line.separator"));
+		}
+
+		if (note.getTitle().length() > 50) {
+			sbError.append("Note title exceeded limit of 50 characters");
+			sbError.append(System.getProperty("line.separator"));
+		}
+
+		if (note.getContent().length() > 200) {
+			sbError.append("Note content exceeded limit of 200 characters");
+			sbError.append(System.getProperty("line.separator"));
+		}
+
+		if (sbError.length() > 0)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sbError.toString());
 
 		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
@@ -81,7 +97,7 @@ public class NoteKeeperController {
 
 		if (note == null)
 			return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
-		
+
 		if (note.getCreatedBy().equalsIgnoreCase("Admin"))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to delete noted created by Admin");
 
@@ -92,6 +108,7 @@ public class NoteKeeperController {
 	@PostMapping("/update")
 	public ResponseEntity<String> updateNote(@RequestBody Note note) {
 		ObjectMapper mapper = new ObjectMapper();
+		StringBuilder sbError = new StringBuilder();
 
 		try {
 			log.info("note: {}", mapper.writeValueAsString(note));
@@ -103,9 +120,27 @@ public class NoteKeeperController {
 
 		if (existNote == null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to update as note does not exist");
-		
+
 		if (existNote.getCreatedBy().equalsIgnoreCase("Admin"))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to update noted created by Admin");
+		
+		if (note.getContent().length() == 0) {
+			sbError.append("Note content cannot be empty");
+			sbError.append(System.getProperty("line.separator"));
+		}
+
+		if (note.getTitle().length() > 50) {
+			sbError.append("Note title exceeded limit of 50 characters");
+			sbError.append(System.getProperty("line.separator"));
+		}
+
+		if (note.getContent().length() > 200) {
+			sbError.append("Note content exceeded limit of 200 characters");
+			sbError.append(System.getProperty("line.separator"));
+		}
+		
+		if (sbError.length() > 0)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sbError.toString());
 
 		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
