@@ -81,6 +81,9 @@ public class NoteKeeperController {
 
 		if (note == null)
 			return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
+		
+		if (note.getCreatedBy().equalsIgnoreCase("Admin"))
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to delete noted created by Admin");
 
 		noteService.deleteNote(note);
 		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
@@ -100,6 +103,9 @@ public class NoteKeeperController {
 
 		if (existNote == null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to update as note does not exist");
+		
+		if (existNote.getCreatedBy().equalsIgnoreCase("Admin"))
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to update noted created by Admin");
 
 		note.setCreatedBy("User");
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
