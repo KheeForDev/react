@@ -75,7 +75,7 @@ Note deleted
 ```
 
 ## Update note
-`POST /note/update`
+`PUT /note/update/{id}`
 ### Request
 ```
 {
