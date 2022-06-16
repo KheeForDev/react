@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -105,8 +106,8 @@ public class NoteKeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
 	}
 
-	@PostMapping("/update")
-	public ResponseEntity<String> updateNote(@RequestBody Note note) {
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateNote(@PathVariable(value = "id") int id, @RequestBody Note note) {
 		ObjectMapper mapper = new ObjectMapper();
 		StringBuilder sbError = new StringBuilder();
 
@@ -116,14 +117,14 @@ public class NoteKeeperController {
 			log.error("error: {}", e.getMessage());
 		}
 
-		Note existNote = noteService.getNoteById(note.getId());
+		Note existNote = noteService.getNoteById(id);
 
 		if (existNote == null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to update as note does not exist");
 
 		if (existNote.getCreatedBy().equalsIgnoreCase("Admin"))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to update noted created by Admin");
-		
+
 		if (note.getContent().length() == 0) {
 			sbError.append("Note content cannot be empty");
 			sbError.append(System.getProperty("line.separator"));
@@ -138,7 +139,7 @@ public class NoteKeeperController {
 			sbError.append("Note content exceeded limit of 200 characters");
 			sbError.append(System.getProperty("line.separator"));
 		}
-		
+
 		if (sbError.length() > 0)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sbError.toString());
 
