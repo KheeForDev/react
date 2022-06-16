@@ -100,7 +100,7 @@ function App() {
     }
   };
 
-  const updateNote = async (note) => {
+  const updateNote = async (id, note) => {
     console.log("run updateNote function");
     // object destructuring to select required key only
     // const updatedNote = (({ title, content, color }) => ({
@@ -116,7 +116,7 @@ function App() {
     // );
 
     try {
-      const response = await axios.post("/note/update", note);
+      const response = await axios.put(`/note/update/${id}`, note);
       console.log(response);
       const { data: message } = response;
 

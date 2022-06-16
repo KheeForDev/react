@@ -22,7 +22,7 @@ function Note(props) {
     }
 
     const handleConfirmEdit = () => {
-        props.onUpdate(updatedNote);
+        props.onUpdate(props.id, updatedNote);
         handleCloseEditDialog();
     }
 
