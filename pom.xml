@@ -7,7 +7,7 @@
 		<version>2.7.0-SNAPSHOT</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>kheefordev</groupId>
+	<groupId>com.kheefordev</groupId>
 	<artifactId>note-keeper</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>note-keeper</name>

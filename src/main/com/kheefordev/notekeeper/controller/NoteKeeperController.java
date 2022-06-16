@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kheefordev.notekeeper.model.Note;
+import com.kheefordev.notekeeper.dto.NoteResponseDto;
+import com.kheefordev.notekeeper.model.Properties;
 import com.kheefordev.notekeeper.service.NoteService;
 
 @CrossOrigin
@@ -32,14 +34,21 @@ public class NoteKeeperController {
 	@Autowired
 	private NoteService noteService;
 
+	@Autowired
+	private Properties properties;
+
 	@GetMapping("/getAll")
 	public ResponseEntity<String> getAllNote() {
 		String result = "";
 		ObjectMapper mapper = new ObjectMapper();
 		List<Note> notes = noteService.getAllNote();
+		
+		NoteResponseDto noteResponseDto = new NoteResponseDto();
+		noteResponseDto.setSize(notes.size());
+		noteResponseDto.setNotes(notes);
 
 		try {
-			result = mapper.writeValueAsString(notes);
+			result = mapper.writeValueAsString(noteResponseDto);
 		} catch (JsonProcessingException e) {
 			log.error("error: {}", e.getMessage());
 		}
@@ -61,17 +70,17 @@ public class NoteKeeperController {
 		}
 
 		if (note.getContent().length() == 0) {
-			sbError.append("Note content cannot be empty");
+			sbError.append(properties.getNoteContentEmptyError());
 			sbError.append(System.getProperty("line.separator"));
 		}
 
 		if (note.getTitle().length() > 50) {
-			sbError.append("Note title exceeded limit of 50 characters");
+			sbError.append(properties.getNoteTitleExceedError());
 			sbError.append(System.getProperty("line.separator"));
 		}
 
 		if (note.getContent().length() > 200) {
-			sbError.append("Note content exceeded limit of 200 characters");
+			sbError.append(properties.getNoteContentExceedError());
 			sbError.append(System.getProperty("line.separator"));
 		}
 
@@ -82,7 +91,7 @@ public class NoteKeeperController {
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 
 		noteService.addNote(note);
-		return ResponseEntity.status(HttpStatus.OK).body("New note added");
+		return ResponseEntity.status(HttpStatus.OK).body(properties.getNoteAddMsg());
 	}
 
 //	@GetMapping("/get/{id}")
@@ -97,13 +106,13 @@ public class NoteKeeperController {
 		Note note = noteService.getNoteById(id);
 
 		if (note == null)
-			return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
+			return ResponseEntity.status(HttpStatus.OK).body(properties.getNoteDeleteMsg());
 
 		if (note.getCreatedBy().equalsIgnoreCase("Admin"))
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to delete noted created by Admin");
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(properties.getNoteDeleteForbiddenError());
 
 		noteService.deleteNote(note);
-		return ResponseEntity.status(HttpStatus.OK).body("Note deleted");
+		return ResponseEntity.status(HttpStatus.OK).body(properties.getNoteDeleteMsg());
 	}
 
 	@PutMapping("/update/{id}")
@@ -120,23 +129,23 @@ public class NoteKeeperController {
 		Note existNote = noteService.getNoteById(id);
 
 		if (existNote == null)
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unable to update as note does not exist");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(properties.getNoteUpdateNotfoundError());
 
 		if (existNote.getCreatedBy().equalsIgnoreCase("Admin"))
-			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Unable to update noted created by Admin");
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(properties.getNoteUpdateForbiddenError());
 
 		if (note.getContent().length() == 0) {
-			sbError.append("Note content cannot be empty");
+			sbError.append(properties.getNoteContentEmptyError());
 			sbError.append(System.getProperty("line.separator"));
 		}
 
 		if (note.getTitle().length() > 50) {
-			sbError.append("Note title exceeded limit of 50 characters");
+			sbError.append(properties.getNoteTitleExceedError());
 			sbError.append(System.getProperty("line.separator"));
 		}
 
 		if (note.getContent().length() > 200) {
-			sbError.append("Note content exceeded limit of 200 characters");
+			sbError.append(properties.getNoteContentExceedError());
 			sbError.append(System.getProperty("line.separator"));
 		}
 
@@ -147,6 +156,6 @@ public class NoteKeeperController {
 		note.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 
 		noteService.updateNote(note);
-		return ResponseEntity.status(HttpStatus.OK).body("Note updated");
+		return ResponseEntity.status(HttpStatus.OK).body(properties.getNoteUpdateMsg());
 	}
 }
