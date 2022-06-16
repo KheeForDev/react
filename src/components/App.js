@@ -18,7 +18,7 @@ function App() {
     try {
       const response = await axios.get("/note/getAll");
       console.log(response);
-      setNotes(response.data);
+      setNotes(response.data.notes);
     } catch (err) {
       console.log(err);
       const { message } = err;
