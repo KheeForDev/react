@@ -8,6 +8,9 @@ public class Properties {
 	@Value("${note.limit}")
 	private int noteLimit;
 
+	@Value("${note.limit.exceed.error}")
+	private String noteLimitExceedError;
+
 	@Value("${note.title.length}")
 	private int noteTitleLength;
 
@@ -47,6 +50,14 @@ public class Properties {
 
 	public void setNoteLimit(int noteLimit) {
 		this.noteLimit = noteLimit;
+	}
+
+	public String getNoteLimitExceedError() {
+		return noteLimitExceedError;
+	}
+
+	public void setNoteLimitExceedError(String noteLimitExceedError) {
+		this.noteLimitExceedError = noteLimitExceedError;
 	}
 
 	public int getNoteTitleLength() {

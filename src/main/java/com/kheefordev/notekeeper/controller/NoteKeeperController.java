@@ -42,7 +42,7 @@ public class NoteKeeperController {
 		String result = "";
 		ObjectMapper mapper = new ObjectMapper();
 		List<Note> notes = noteService.getAllNote();
-		
+
 		NoteResponseDto noteResponseDto = new NoteResponseDto();
 		noteResponseDto.setSize(notes.size());
 		noteResponseDto.setNotes(notes);
@@ -67,6 +67,11 @@ public class NoteKeeperController {
 			log.info("note: {}", mapper.writeValueAsString(note));
 		} catch (JsonProcessingException e) {
 			log.error("error: {}", e.getMessage());
+		}
+
+		List<Note> notes = noteService.getAllNote();
+		if (notes.size() >= properties.getNoteLimit()) {
+			return ResponseEntity.status(HttpStatus.INSUFFICIENT_STORAGE).body(properties.getNoteLimitExceedError());
 		}
 
 		if (note.getContent().length() == 0) {
