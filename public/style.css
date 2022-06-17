@@ -8,9 +8,13 @@ header {
   background-color: #b2beb5;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header h1 {
+header h1,
+h5 {
   color: #fff;
   font-family: "McLaren", cursive;
   font-weight: 200;

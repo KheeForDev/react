@@ -11,6 +11,7 @@ import axios from "../utils/axios";
 function App() {
   const [notes, setNotes] = useState([]);
   const [colors, setColors] = useState([]);
+  const [notesSize, setNotesSize] = useState(0);
 
   const getAllNote = async () => {
     console.log("run getAllNote function");
@@ -19,6 +20,7 @@ function App() {
       const response = await axios.get("/note/getAll");
       console.log(response);
       setNotes(response.data.notes);
+      setNotesSize(response.data.size);
     } catch (err) {
       console.log(err);
       const { message } = err;
@@ -122,7 +124,7 @@ function App() {
 
       toast.success(message, {
         autoClose: 5000,
-      });              
+      });
       getAllNote();
     } catch (err) {
       console.log(err);
@@ -136,7 +138,9 @@ function App() {
 
   return (
     <div>
-      <Header />
+      <Header
+        currenteNotesSize={notesSize}
+      />
       <AddNote onAdd={addNote} colors={colors} />
       <div className="flex-container">
         {notes.map((note) => (
