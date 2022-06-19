@@ -12,6 +12,10 @@ public class Color {
 	private int id;
 	private String color_name;
 	private String color_value;
+	
+	public Color() {
+		
+	}
 
 	public int getId() {
 		return id;

@@ -18,6 +18,10 @@ public class Note {
 	private String createdBy;
 	private Timestamp createdOn;
 
+	public Note() {
+
+	}
+
 	public int getId() {
 		return id;
 	}
