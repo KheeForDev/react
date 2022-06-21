@@ -19,14 +19,14 @@ import com.kheefordev.notekeeper.service.ColorService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/color")
+@RequestMapping("/api")
 public class ColorController {
 	private static final Logger log = LogManager.getLogger(ColorController.class);
 
 	@Autowired
 	private ColorService colorService;
 
-	@GetMapping("/getAll")
+	@GetMapping("/color/getAll")
 	public ResponseEntity<String> getAllColor() {
 		String result = "";
 		ObjectMapper mapper = new ObjectMapper();

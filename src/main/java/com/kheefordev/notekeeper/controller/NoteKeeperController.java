@@ -27,7 +27,7 @@ import com.kheefordev.notekeeper.service.NoteService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/note")
+@RequestMapping("/api")
 public class NoteKeeperController {
 	private static final Logger log = LogManager.getLogger(NoteKeeperController.class);
 
@@ -37,7 +37,7 @@ public class NoteKeeperController {
 	@Autowired
 	private Properties properties;
 
-	@GetMapping("/getAll")
+	@GetMapping("/note/getAll")
 	public ResponseEntity<String> getAllNote() {
 		String result = "";
 		ObjectMapper mapper = new ObjectMapper();
@@ -58,7 +58,7 @@ public class NoteKeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
-	@PostMapping("/add")
+	@PostMapping("/note/add")
 	public ResponseEntity<String> addNote(@RequestBody Note note) {
 		ObjectMapper mapper = new ObjectMapper();
 		StringBuilder sbError = new StringBuilder();
@@ -99,12 +99,12 @@ public class NoteKeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body(properties.getNoteAddMsg());
 	}
 
-//	@GetMapping("/get/{id}")
+//	@GetMapping("/note/get/{id}")
 //	public Note getNote(@PathVariable(value = "id") int id) {
 //		return noteService.getNote(id);
 //	}
 
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/note/delete/{id}")
 	public ResponseEntity<String> deleteNote(@PathVariable(value = "id") int id) {
 		log.info("note id: {}", id);
 
@@ -120,7 +120,7 @@ public class NoteKeeperController {
 		return ResponseEntity.status(HttpStatus.OK).body(properties.getNoteDeleteMsg());
 	}
 
-	@PutMapping("/update/{id}")
+	@PutMapping("/note/update/{id}")
 	public ResponseEntity<String> updateNote(@PathVariable(value = "id") int id, @RequestBody Note note) {
 		ObjectMapper mapper = new ObjectMapper();
 		StringBuilder sbError = new StringBuilder();
