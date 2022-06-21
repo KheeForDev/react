@@ -1,6 +1,6 @@
 # API
 ## Retrieve all colors
-`GET /color/getAll`
+`GET /api/color/getAll`
 ### Request
 ```
 None
@@ -21,7 +21,7 @@ None
 ]
 ```
 ## Retrieve all notes
-`GET /note/getAll`
+`GET /api/note/getAll`
 ### Request
 ```
 None
@@ -49,7 +49,7 @@ None
 ```
 
 ## Add new note
-`POST /note/add`
+`POST /api/note/add`
 ### Request
 ```
 {
@@ -64,7 +64,7 @@ New note added
 ```
 
 ## Delete note
-`DEL /note/delete/{id}`
+`DEL /api/note/delete/{id}`
 ### Request
 ```
 None
@@ -75,7 +75,7 @@ Note deleted
 ```
 
 ## Update note
-`PUT /note/update/{id}`
+`PUT /api/note/update/{id}`
 ### Request
 ```
 {
