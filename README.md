@@ -18,6 +18,6 @@ A frontend web application built using React. The function of this web applicati
 # Importance
 ### API Serivce Base URL
 Current project is pointing to an API service deployed in Heroku. <br/>
-<img width="464" alt="image" src="https://user-images.githubusercontent.com/52060358/174551676-a22a5a16-18be-4932-bea0-9c0078b5c365.png"></img>
+<img width="486" alt="image" src="https://user-images.githubusercontent.com/52060358/174730623-3e07e826-596c-4a8c-8699-b2fb4f44c641.png"></img>
 
 It can be modified under `src/utils/axios.js` file if there is another backend service or changed in base URL.
