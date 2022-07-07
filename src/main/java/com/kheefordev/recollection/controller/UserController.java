@@ -35,7 +35,12 @@ public class UserController {
 	}
 
 	@PostMapping("/user/save")
-	public ResponseEntity<User> saveUser(@RequestBody User user) {
+	public ResponseEntity<String> saveUser(@RequestBody User user) {
+		User existUser = userService.getUser(user.getUsername());
+		
+		if (existUser != null)
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Username taken");
+		
 		User newUser = userService.saveUser(user);
 
 		if (newUser != null) {
@@ -44,7 +49,7 @@ public class UserController {
 			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to create user");
 		}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+		return ResponseEntity.status(HttpStatus.CREATED).body("You have signed up successfully");
 	}
 
 	@PostMapping("/role/save")
