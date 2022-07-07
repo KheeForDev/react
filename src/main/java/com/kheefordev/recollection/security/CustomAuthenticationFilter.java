@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -39,8 +40,17 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String username = "";
+		String password = "";
+
+		// for request using application/json
+		try {
+			Map<?, ?> requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+			username = (String) requestMap.get("username");
+			password = (String) requestMap.get("password");
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
 
 		log.info("username: {}", username);
 		log.info("password: {}", password);
@@ -63,9 +73,15 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 						user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				.sign(algorithm);
 
-		Map<String, String> responseHM = new HashMap<String, String>();
+		List<String> roles = new ArrayList<String>();
+		for (GrantedAuthority grantedAuthority : user.getAuthorities()) {
+			roles.add(grantedAuthority.getAuthority());
+		}
+		
+		Map<Object, Object> responseHM = new HashMap<Object, Object>();
 		responseHM.put("username", user.getUsername());
 		responseHM.put("accessToken", accessToken);
+		responseHM.put("roles", roles);
 
 		response.setContentType("application/json");
 		new ObjectMapper().writeValue(response.getOutputStream(), responseHM);

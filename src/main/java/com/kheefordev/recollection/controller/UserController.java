@@ -27,7 +27,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getUsers() {
 		List<User> users = userService.getUsers();
@@ -36,7 +36,15 @@ public class UserController {
 
 	@PostMapping("/user/save")
 	public ResponseEntity<User> saveUser(@RequestBody User user) {
-		return ResponseEntity.status(HttpStatus.OK).body(null);
+		User newUser = userService.saveUser(user);
+
+		if (newUser != null) {
+			userService.addRoleToUser(newUser.getUsername(), "ROLE_USER");
+		} else {
+			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to create user");
+		}
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
 	}
 
 	@PostMapping("/role/save")
