@@ -1,2 +1,4 @@
-export const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-export const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+export const REGEX_USER = /^[A-z][A-z0-9-_]{3,23}$/;
+export const REGEX_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+export const API_REGISTER = "/user/save"
