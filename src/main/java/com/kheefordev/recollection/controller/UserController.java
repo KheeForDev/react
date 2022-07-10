@@ -1,5 +1,6 @@
 package com.kheefordev.recollection.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kheefordev.recollection.dto.UserRequestDto;
 import com.kheefordev.recollection.model.Role;
 import com.kheefordev.recollection.model.RoleToUser;
 import com.kheefordev.recollection.model.User;
@@ -35,12 +37,19 @@ public class UserController {
 	}
 
 	@PostMapping("/user/save")
-	public ResponseEntity<String> saveUser(@RequestBody User user) {
-		User existUser = userService.getUser(user.getUsername());
+	public ResponseEntity<String> saveUser(@RequestBody UserRequestDto userRequestDto) {
+		User existUser = userService.getUser(userRequestDto.getUsername());
 		
 		if (existUser != null)
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Username taken");
 		
+		User user = new User();
+		user.setUsername(userRequestDto.getUsername());
+		user.setPassword(userRequestDto.getPassword());
+		user.setCreatedBy("system");
+		user.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+		user.setUpdatedBy("system");
+		user.setUpdatedOn(new Timestamp(System.currentTimeMillis()));
 		User newUser = userService.saveUser(user);
 
 		if (newUser != null) {
