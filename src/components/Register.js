@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -57,7 +58,7 @@ const Register = () => {
     };
 
     return (
-        <div>
+        <section>
             <p className={errMsg ? "errmsg" : "hide"}>{errMsg}</p>
             <h1>Register</h1>
             <Form onSubmit={handleSubmit}>
@@ -118,10 +119,14 @@ const Register = () => {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Submit
+                    Register
                 </Button>
+
+                <p>
+                    Already a user? <Link to="/login">Login</Link>
+                </p>
             </Form>
-        </div>
+        </section>
     );
 }
 
