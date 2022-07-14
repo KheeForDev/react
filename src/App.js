@@ -25,10 +25,10 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />}>
           <Route path="/" element={<Home />} />
         </Route>
-      </Route>
 
-      {/* for route that does not match any of the above */}
-      <Route path="*" element={<Missing />} />
+        {/* for route that does not match any of the above */}
+        <Route path="*" element={<Missing />} />
+      </Route>
     </Routes>
   );
 }
