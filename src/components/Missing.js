@@ -2,9 +2,9 @@ import React from "react";
 
 const Missing = () => {
     return (
-        <div>
+        <section>
             <h1>Missing</h1>
-        </div>
+        </section>
     );
 }
 

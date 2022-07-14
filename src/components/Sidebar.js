@@ -3,16 +3,20 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     return (
-        <nav>
+        <nav className="sidebar">
             <h2>Public</h2>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <ul>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/register">Register</Link></li>
+            </ul>
             <br />
             <h2>Private</h2>
-            <Link to="/">Home</Link>
-            <Link to="/editor">Editors Page</Link>
-            <Link to="/admin">Admin Page</Link>
-            <Link to="/">Logout</Link>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/editor">Editors Page</Link></li>
+                <li><Link to="/admin">Admin Page</Link></li>
+                <li><Link to="/">Logout</Link></li>
+            </ul>
         </nav>
     );
 }

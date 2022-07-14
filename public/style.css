@@ -1,3 +1,45 @@
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background: #B4C9C7;
+    position: fixed;
+    height: 100%;
+    width: 15%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* remove bullet from ul */
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar ul li {
+    margin: 25px 0px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    padding: 0 30px;
+    text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+    color: #57838D;
+    margin-left: 20px;
+    transition: 0.4s;
+}
+
+.main {
+    margin-left: 15%;
+    padding: 5px;
+}
+
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
@@ -8,7 +50,7 @@
     bottom: -10px;
 }
 
-.instructions > svg {
+.instructions>svg {
     margin-right: 0.25rem;
 }
 

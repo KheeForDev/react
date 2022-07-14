@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const Layout = ({ children }) => {
     return (
-        <main>
+        <main className="main">
             <Outlet />
         </main>
     );
