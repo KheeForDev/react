@@ -5,7 +5,6 @@ import useAuth from "../hook/useAuth";
 
 const RequireAuth = ({ allowedRoles }) => {
     const { auth } = useAuth();
-    const location = useLocation();
 
     return (
         // return child component
@@ -18,7 +17,7 @@ const RequireAuth = ({ allowedRoles }) => {
         // auth has no role and not logged in
         auth?.roles?.find(role => allowedRoles.includes(role))
             ? <Outlet />
-            : auth?.user
+            : auth?.username
                 ? <Navigate to="/unauthorized" />
                 : <Navigate to="/login" />
     );
