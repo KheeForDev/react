@@ -13,6 +13,7 @@ const Sidebar = () => {
             <h2>Private</h2>
             <ul>
                 <li><Link to="/">Home</Link></li>
+                <li><Link to="/addwarranty">Warranty</Link></li>
                 <li><Link to="/editor">Editors Page</Link></li>
                 <li><Link to="/admin">Admin Page</Link></li>
                 <li><Link to="/">Logout</Link></li>

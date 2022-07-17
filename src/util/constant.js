@@ -3,3 +3,5 @@ export const REGEX_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{
 
 export const API_LOGIN = "/login";
 export const API_REGISTER = "/user/save";
+
+export const API_WARRANTY_CATEGORIES = "/warrantycategories"

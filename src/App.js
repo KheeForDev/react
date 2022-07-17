@@ -10,7 +10,10 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Unauthorized from "./components/Unauthorized"
 import Home from "./components/Home";
+import AddWarranty from "./components/AddWarranty";
+import Admin from "./components/Admin";
 import Missing from "./components/Missing";
+
 
 function App() {
   return (
@@ -26,8 +29,12 @@ function App() {
           <Route path="/" element={<Home />} />
         </Route>
 
+        <Route element={<RequireAuth allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />}>
+          <Route path="/addwarranty" element={<AddWarranty />} />
+        </Route>
+
         <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>
-          <Route path="/admin" element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
         </Route>
 
         {/* for route that does not match any of the above */}
