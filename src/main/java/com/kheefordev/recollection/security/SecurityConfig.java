@@ -67,6 +67,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/login").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users").hasAnyAuthority("ROLE_ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save").permitAll();
+		
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/warrantycategories").permitAll();
 
 		// httpBasic()
 		// tells spring security that clients are going to authenticate the requests

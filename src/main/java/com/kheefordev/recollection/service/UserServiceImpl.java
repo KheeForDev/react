@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUsers() {
-		log.info("Fetching all users {}");
+		log.info("Fetching all users");
 		return userRepository.findAll();
 	}
 
