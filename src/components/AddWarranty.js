@@ -36,18 +36,31 @@ const Warranty = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setWarranty(prevState => ({ ...prevState, [name]: value }));
-    }
+    };
 
     return (
-        <div>
-            <h1>Add Warranty</h1>
-            <Form.Select name="color" onChange={handleChange} >
-                {warrantyCategories.map(item => {
-                    return (<option key={item.id} value={item.id}>{item.name}</option>);
-                }
-                )}
-            </Form.Select>
-        </div>
+        <>
+            {!warrantyCategories
+                ? (
+                    <div>
+                        <center>
+                            <h1>Loading...</h1>
+                        </center>
+                    </div>
+                )
+                : (
+                    <div>
+                        <h1>Add Warranty</h1>
+                        <Form.Select name="color" onChange={handleChange} >
+                            {warrantyCategories.map(item => {
+                                return (<option key={item.id} value={item.id}>{item.name}</option>);
+                            }
+                            )}
+                        </Form.Select>
+                    </div>
+                )
+            }
+        </>
     );
 }
 
