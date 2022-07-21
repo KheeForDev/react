@@ -1,9 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-// required for react bootstrap
-import "bootstrap/dist/css/bootstrap.min.css";
-
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequireAuth";
 import Login from "./components/Login";

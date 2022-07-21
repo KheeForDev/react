@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+// required for react bootstrap
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./style.css";
+
 import { AuthProvider } from "./context/AuthProvider"
 import Sidebar from "./components/Sidebar"
 import App from "./App"
