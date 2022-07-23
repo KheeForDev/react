@@ -5,3 +5,5 @@ export const API_LOGIN = "/login";
 export const API_REGISTER = "/user/save";
 
 export const API_WARRANTY_CATEGORIES = "/warrantycategories"
+
+export const API_WARRANTY_ADD = "/warranty/add";
