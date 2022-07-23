@@ -34,10 +34,6 @@ public class RecollectionApplication {
 //					new Timestamp(System.currentTimeMillis()), "system", new Timestamp(System.currentTimeMillis())));
 //
 //			userService.addRoleToUser("john", "ROLE_ADMIN");
-//			userService.addRoleToUser("john", "ROLE_USER");
-//			userService.addRoleToUser("mary", "ROLE_ADMIN");
-//			userService.addRoleToUser("mary", "ROLE_USER");
-//			userService.addRoleToUser("Jane", "ROLE_USER");
 //			userService.addRoleToUser("kate", "ROLE_USER");
 //		};
 //	}

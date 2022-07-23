@@ -4,6 +4,16 @@ public class UserRequestDto {
 	private String username;
 	private String password;
 
+	public UserRequestDto() {
+		
+	}
+	
+	public UserRequestDto(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
 	public String getUsername() {
 		return username;
 	}

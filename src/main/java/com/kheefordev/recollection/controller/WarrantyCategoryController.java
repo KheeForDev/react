@@ -2,6 +2,8 @@ package com.kheefordev.recollection.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +19,11 @@ import com.kheefordev.recollection.service.WarrantyService;
 @RestController
 @RequestMapping("/api")
 public class WarrantyCategoryController {
-	
+	private static final Logger log = LogManager.getLogger(WarrantyCategoryController.class);
+
 	@Autowired
 	private WarrantyService warrantyService;
-	
+
 	@GetMapping("/warrantycategories")
 	public ResponseEntity<List<WarrantyCategory>> getWarrantyCategories() {
 		List<WarrantyCategory> categories = warrantyService.getWarrantyCategories();

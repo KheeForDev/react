@@ -15,8 +15,7 @@ public class Warranty {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String productName;
-	@ManyToOne(fetch = FetchType.EAGER)
-	private WarrantyCategory warrantyCategory;
+	private Long warrantyCategoryId;
 	private String brand;
 	private String model;
 	private Timestamp startDate;
@@ -31,13 +30,13 @@ public class Warranty {
 
 	}
 
-	public Warranty(Long id, String productName, WarrantyCategory warrantyCategory, String brand, String model,
+	public Warranty(Long id, String productName, Long warrantyCategoryId, String brand, String model,
 			Timestamp startDate, Timestamp endDate, String remark, String createdBy, Timestamp createdOn,
 			String updatedBy, Timestamp updatedOn) {
 		super();
 		this.id = id;
 		this.productName = productName;
-		this.warrantyCategory = warrantyCategory;
+		this.warrantyCategoryId = warrantyCategoryId;
 		this.brand = brand;
 		this.model = model;
 		this.startDate = startDate;
@@ -65,12 +64,12 @@ public class Warranty {
 		this.productName = productName;
 	}
 
-	public WarrantyCategory getWarrantyCategory() {
-		return warrantyCategory;
+	public Long getWarrantyCategoryId() {
+		return warrantyCategoryId;
 	}
 
-	public void setWarrantyCategory(WarrantyCategory warrantyCategory) {
-		this.warrantyCategory = warrantyCategory;
+	public void setWarrantyCategoryId(Long warrantyCategoryId) {
+		this.warrantyCategoryId = warrantyCategoryId;
 	}
 
 	public String getBrand() {
