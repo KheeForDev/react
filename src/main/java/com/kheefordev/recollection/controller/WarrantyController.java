@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kheefordev.recollection.dto.WarrantyRequestDto;
+import com.kheefordev.recollection.model.Properties;
 import com.kheefordev.recollection.model.Warranty;
 import com.kheefordev.recollection.service.WarrantyService;
 import com.kheefordev.recollection.util.DateUtil;
@@ -38,6 +38,9 @@ public class WarrantyController {
 
 	@Autowired
 	private DateUtil dateUtil;
+	
+	@Autowired
+	private Properties properties;
 
 	@GetMapping("/warranties")
 	public ResponseEntity<List<Warranty>> getWarranties(@RequestHeader HttpHeaders headers) {
@@ -72,6 +75,6 @@ public class WarrantyController {
 
 		warrantyService.addWarranty(warranty);
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(null);
+		return ResponseEntity.status(HttpStatus.CREATED).body(properties.getWntyAddMsg());
 	}
 }
