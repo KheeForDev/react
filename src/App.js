@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized"
 import Home from "./pages/Home";
+import Warranty from "./pages/warranty/Warranty";
 import AddWarranty from "./pages/warranty/AddWarranty";
 import Admin from "./pages/Admin";
 import Missing from "./pages/Missing";
@@ -26,7 +27,11 @@ function App() {
           <Route path="/" element={<Home />} />
         </Route>
 
-        <Route element={<RequireAuth allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />}>
+        <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
+          <Route path="/warranty" element={<Warranty />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
           <Route path="/addwarranty" element={<AddWarranty />} />
         </Route>
 

@@ -58,6 +58,7 @@ const Warranty = () => {
         <>
             {!warrantyCategories
                 ? (
+                    // show loading page until data are fetched
                     <Loading />
                 )
                 : (
