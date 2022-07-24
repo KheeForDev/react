@@ -36,8 +36,7 @@ public class WarrantyServiceImpl implements WarrantyService {
 	@Override
 	public List<Warranty> getWarranties(String username) {
 		log.info("Fetching all warranties");
-		// TODO Auto-generated method stub
-		return null;
+		return warrantyRepository.findByCreatedBy(username);
 	}
 
 
