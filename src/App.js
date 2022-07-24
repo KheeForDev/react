@@ -3,14 +3,14 @@ import { Routes, Route } from "react-router-dom";
 
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequireAuth";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Unauthorized from "./components/Unauthorized"
-import Home from "./components/Home";
-import AddWarranty from "./components/AddWarranty";
-import Admin from "./components/Admin";
-import Missing from "./components/Missing";
 
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Unauthorized from "./pages/Unauthorized"
+import Home from "./pages/Home";
+import AddWarranty from "./pages/warranty/AddWarranty";
+import Admin from "./pages/Admin";
+import Missing from "./pages/Missing";
 
 function App() {
   return (

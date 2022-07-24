@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-import Loading from "./Loading";
-import * as constant from "../util/constant";
-import useAuth from "../hook/useAuth";
-import axios from "../util/axios";
+import Loading from "../../components/Loading";
+import * as constant from "../../util/constant";
+import useAuth from "../../hook/useAuth";
+import axios from "../../util/axios";
 
 const Warranty = () => {
     const { auth } = useAuth();
