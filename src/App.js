@@ -16,12 +16,13 @@ import Missing from "./pages/Missing";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        {/* public routes */}
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="unauthorized" element={<Unauthorized />} />
 
+      {/* public routes */}
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="unauthorized" element={<Unauthorized />} />
+
+      <Route path="/" element={<Layout />}>
         {/* protected routes */}
         <Route element={<RequireAuth allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />}>
           <Route path="/" element={<Home />} />

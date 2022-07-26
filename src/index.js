@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 
 import { AuthProvider } from "./context/AuthProvider"
-import Sidebar from "./components/Sidebar"
 import App from "./App"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +14,6 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <Sidebar />
         <Routes>
           <Route path="/*" element={<App />} />
         </Routes>
