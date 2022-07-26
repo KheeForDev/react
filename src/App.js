@@ -7,10 +7,10 @@ import RequireAuth from "./components/RequireAuth";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Unauthorized from "./pages/Unauthorized"
-import Home from "./pages/Home";
+import About from "./pages/About";
 import Warranty from "./pages/warranty/Warranty";
 import AddWarranty from "./pages/warranty/AddWarranty";
-import Admin from "./pages/Admin";
+import Setting from "./pages/Setting";
 import Missing from "./pages/Missing";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* protected routes */}
         <Route element={<RequireAuth allowedRoles={["ROLE_USER", "ROLE_ADMIN"]} />}>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<About />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
@@ -37,7 +37,7 @@ function App() {
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/Setting" element={<Setting />} />
         </Route>
 
         {/* for route that does not match any of the above */}

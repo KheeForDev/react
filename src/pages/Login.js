@@ -57,6 +57,7 @@ const Login = () => {
                 })
             );
 
+            const username = constant.DEMO_ADMIN_USERNAME;
             const { roles, accessToken } = response.data;
             setAuth({ username, roles, accessToken })
 
@@ -78,6 +79,7 @@ const Login = () => {
                 })
             );
 
+            const username = constant.DEMO_USER_USERNAME;
             const { roles, accessToken } = response.data;
             setAuth({ username, roles, accessToken })
 

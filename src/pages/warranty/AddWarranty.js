@@ -9,7 +9,7 @@ import * as constant from "../../util/constant";
 import useAuth from "../../hook/useAuth";
 import axios from "../../util/axios";
 
-const Warranty = () => {
+const AddWarranty = () => {
     const { auth } = useAuth();
     const [warrantyCategories, setWarrantyCategories] = useState();
     const [warranty, setWarranty] = useState({});
@@ -135,4 +135,4 @@ const Warranty = () => {
     );
 }
 
-export default Warranty;
+export default AddWarranty;
