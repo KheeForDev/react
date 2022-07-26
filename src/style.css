@@ -63,23 +63,28 @@ body {
     justify-content: center;
 }
 
-.form-container .form-login {
-    width: 50%;
+.form-container .form-login,
+.form-container .form-register {
+    width: 25%;
+    margin: 30px 0 0 0;
     padding: 30px;
     background-color: #FFF;
     border-radius: 10px;
 }
 
-.form-login h1 {
+.form-login h1,
+.form-register h1 {
     text-align: center;
     margin: 0 0 30px 0;
 }
 
-.form-login button {
+.form-login button,
+.form-register button {
     width: 100%;
 }
 
-.form-login p {
+.form-login p,
+.form-register p {
     margin: 10px 0;
 }
 
@@ -98,7 +103,6 @@ body {
 .form-login .button-container {
     display: flex;
     justify-content: space-around;
-    margin: 30px 0;
 }
 
 .form-login .button-admin {
