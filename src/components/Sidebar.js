@@ -16,9 +16,10 @@ const Sidebar = () => {
 
     return (
         <nav className="sidebar">
-            {/* <div>
+            <div className="profile">
                 <img src={img_placeholder} />
-            </div> */}
+                <p className="username">{auth?.username}</p>
+            </div>
             <ul>
                 <li><Link to="/"><UilExclamationCircle />About</Link></li>
                 {auth?.roles?.includes("ROLE_USER") && <li><Link to="/warranty"><UilShieldCheck />Warranty</Link></li>}

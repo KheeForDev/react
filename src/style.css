@@ -30,13 +30,30 @@ body {
     z-index: 0;
 }
 
+.sidebar .profile {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.sidebar .profile img {
+    height: 50%;
+    width: 50%;
+    border-radius: 50%;
+}
+
+.sidebar .profile .username {
+    color: #F4976C;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
 /* remove bullet from ul */
 .sidebar ul {
     list-style-type: none;
 }
 
 .sidebar ul li {
-    margin: 25px 0px;
+    margin: 30px 0px;
 }
 
 .sidebar ul li a {
@@ -162,4 +179,4 @@ footer {
 
 footer a {
     margin: 0 5px;
-} 
+}
