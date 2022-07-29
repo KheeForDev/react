@@ -24,17 +24,13 @@ public class RecollectionApplication {
 //			userService.saveRole(new Role(null, "ROLE_USER"));
 //			userService.saveRole(new Role(null, "ROLE_ADMIN"));
 //
-//			userService.saveUser(new User(null, "john", "1234", new ArrayList<Role>(), "system",
+//			userService.saveUser(new User(null, "demo_admin", "password", new ArrayList<Role>(), "system",
 //					new Timestamp(System.currentTimeMillis()), "system", new Timestamp(System.currentTimeMillis())));
-//			userService.saveUser(new User(null, "mary", "1234", new ArrayList<Role>(), "system",
-//					new Timestamp(System.currentTimeMillis()), "system", new Timestamp(System.currentTimeMillis())));
-//			userService.saveUser(new User(null, "jane", "1234", new ArrayList<Role>(), "system",
-//					new Timestamp(System.currentTimeMillis()), "system", new Timestamp(System.currentTimeMillis())));
-//			userService.saveUser(new User(null, "kate", "1234", new ArrayList<Role>(), "system",
+//			userService.saveUser(new User(null, "demo_user", "password", new ArrayList<Role>(), "system",
 //					new Timestamp(System.currentTimeMillis()), "system", new Timestamp(System.currentTimeMillis())));
 //
-//			userService.addRoleToUser("john", "ROLE_ADMIN");
-//			userService.addRoleToUser("kate", "ROLE_USER");
+//			userService.addRoleToUser("demo_admin", "ROLE_ADMIN");
+//			userService.addRoleToUser("demo_user", "ROLE_USER");
 //		};
 //	}
 }

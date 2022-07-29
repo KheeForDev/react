@@ -10,5 +10,11 @@ public interface WarrantyService {
 
 	public List<Warranty> getWarranties(String username);
 
+	public Warranty getWarrantyById(int id);
+
 	public void addWarranty(Warranty warrant);
+
+	public void deleteNote(Warranty warrant);
+
+	public void updateNote(Warranty warrant);
 }

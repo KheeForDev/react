@@ -70,7 +70,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/warrantycategories").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/warranties").hasAnyAuthority("ROLE_USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/warranty/get/*").hasAnyAuthority("ROLE_USER");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/warranty/add").hasAnyAuthority("ROLE_USER");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/warranty/delete/*").hasAnyAuthority("ROLE_USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/warranty/update/*").hasAnyAuthority("ROLE_USER");
 
 		// httpBasic()
 		// tells spring security that clients are going to authenticate the requests

@@ -22,7 +22,7 @@ public class WarrantyServiceImpl implements WarrantyService {
 
 	@Autowired
 	private WarrantyCategoryRepository warrantyCategoryRepository;
-	
+
 	@Autowired
 	private WarrantyRepository warrantyRepository;
 
@@ -32,17 +32,34 @@ public class WarrantyServiceImpl implements WarrantyService {
 		return warrantyCategoryRepository.findAll();
 	}
 
-
 	@Override
 	public List<Warranty> getWarranties(String username) {
 		log.info("Fetching all warranties");
 		return warrantyRepository.findByCreatedBy(username);
 	}
 
+	@Override
+	public Warranty getWarrantyById(int id) {
+		log.info("Fetching warranty - id : {}", id);
+		Warranty warranty = warrantyRepository.findById(id).orElse(null);
+		return warranty;
+	}
 
 	@Override
 	public void addWarranty(Warranty warranty) {
 		log.info("Adding warranty");
 		warrantyRepository.save(warranty);
+	}
+
+	@Override
+	public void deleteNote(Warranty warrant) {
+		log.info("Deleting warranty - id : {}", warrant.getId());
+		warrantyRepository.delete(warrant);
+	}
+
+	@Override
+	public void updateNote(Warranty warrant) {
+		log.info("Updating warranty - id : {}", warrant.getId());
+		warrantyRepository.save(warrant);
 	}
 }
