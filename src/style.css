@@ -73,7 +73,7 @@ body {
     padding: 20px;
 }
 
-/* LOGIN */
+/* LOGIN & REGISTER */
 .form-container {
     display: flex;
     align-items: center;
@@ -130,7 +130,25 @@ body {
     margin: 0 0 0 5px;
 }
 
-/* REGISTER */
+.button-add-warranty .card-body:hover {
+    cursor: pointer;
+}
+
+.warranty-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.warranty-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.warranty-container .card {
+    margin: 20px 10px 10px 0;
+}
+
+/* REGISTER VALIDATION */
 .instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
