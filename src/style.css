@@ -117,11 +117,6 @@ body {
     padding: 0 10px;
 }
 
-.form-login .button-container {
-    display: flex;
-    justify-content: space-around;
-}
-
 .form-login .button-admin {
     margin: 0 5px 0 0;
 }
@@ -130,6 +125,7 @@ body {
     margin: 0 0 0 5px;
 }
 
+/* WARRANTY */
 .button-add-warranty .card-body:hover {
     cursor: pointer;
 }
@@ -146,6 +142,32 @@ body {
 
 .warranty-container .card {
     margin: 20px 10px 10px 0;
+}
+
+/* ADD WARRANTY */
+.form-container .form-warranty {
+    width: 50%;
+    margin: 30px 0 0 0;
+    padding: 30px;
+    background-color: #FFF;
+    border-radius: 10px;
+}
+
+.form-warranty p {
+    font-size: 12px;
+    text-align: right;
+}
+
+.form-warranty button {
+    width: 100%;
+}
+
+.form-warranty .button-back {
+    margin: 0 5px 0 0;
+}
+
+.form-warranty .button-add {
+    margin: 0 0 0 5px;
 }
 
 /* REGISTER VALIDATION */
@@ -197,4 +219,10 @@ footer {
 
 footer a {
     margin: 0 5px;
+}
+
+/* COMMON */
+.button-container {
+    display: flex;
+    justify-content: space-around;
 }

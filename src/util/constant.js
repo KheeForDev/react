@@ -1,6 +1,8 @@
 export const REGEX_USER = /^[A-z][A-z0-9-_]{3,23}$/;
 export const REGEX_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
+export const TEXTAREA_MAX_LENGTH = 255;
+
 export const DEMO_ADMIN_USERNAME = "demo_admin";
 export const DEMO_ADMIN_PASSWORD = "password";
 export const DEMO_USER_USERNAME = "demo_user";

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Form from "react-bootstrap/Form";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -11,6 +14,8 @@ import axios from "../../util/axios";
 
 const AddWarranty = () => {
     const { auth } = useAuth();
+    const navigate = useNavigate();
+    const textareaMaxLength = constant.TEXTAREA_MAX_LENGTH;
     const [warrantyCategories, setWarrantyCategories] = useState();
     const [warranty, setWarranty] = useState({});
 
@@ -30,7 +35,13 @@ const AddWarranty = () => {
 
     useEffect(() => {
         getWarrantyCategories();
-    }, [])
+    }, []);
+
+    const handleKeyUp = (e) => {
+        const counterElement = document.getElementById("lengthCounter")
+        counterElement.innerHTML = textareaMaxLength - e.target.value.length;
+    };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -48,10 +59,20 @@ const AddWarranty = () => {
                 }
             );
 
-            console.log(response);
+            const { data: message } = response;
+
+            toast.success(message, {
+                autoClose: 5000,
+            });
+
+            navigate("/warranty");
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const handleBack = () => {
+        navigate("/warranty");
     }
 
     return (
@@ -62,72 +83,100 @@ const AddWarranty = () => {
                     <Loading />
                 )
                 : (
-                    <div>
-                        <h1>Add Warranty</h1>
-                        <Form>
-                            <Form.Group className="mb-3" controlId="formHorizontalProductName">
-                                <Form.Label column sm={2}>
-                                    Product Name
-                                </Form.Label>
-                                <Form.Control type="text" placeholder="Product Name" name="productName" value={warranty.productName} onChange={handleChange} />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formHorizontalWarrantyCategory">
-                                <Form.Label column sm={2}>
-                                    Warranty Category
-                                </Form.Label>
-
-                                <Form.Select name="warrantyCategory" value={warranty.warrantyCategory} onChange={handleChange} >
-                                    <option value="">- Warranty Category -</option>
-                                    {warrantyCategories.map(item => {
-                                        return (<option key={item.id} value={item.id}>{item.name}</option>);
-                                    }
-                                    )}
-                                </Form.Select>
-
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formHorizontalBrand">
-                                <Form.Label column sm={2}>
-                                    Brand
-                                </Form.Label>
-                                <Form.Control type="text" placeholder="Brand" name="brand" value={warranty.brand} onChange={handleChange} />
-                            </Form.Group>
-
-                            <Form.Group className="mb-3" controlId="formHorizontalModel">
-                                <Form.Label column sm={2}>
-                                    Model
-                                </Form.Label>
-                                <Form.Control type="text" placeholder="Model" name="model" value={warranty.model} onChange={handleChange} />
-                            </Form.Group>
-
-                            <Row className="mb-3">
-                                <Form.Group as={Col} className="mb-3" controlId="formHorizontalStartDate">
-                                    <Form.Label column sm={2}>
-                                        Start Date
-                                    </Form.Label>
-                                    <Form.Control type="date" placeholder="Start Date" name="startDate" value={warranty.startDate} onChange={handleChange} />
+                    <div className="form-container">
+                        <div className="form-warranty">
+                            <h1>Add Warranty</h1>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formHorizontalProductName">
+                                    <FloatingLabel
+                                        controlId="floatingInputProductName"
+                                        label="Product Name"
+                                        className="mb-3"
+                                    >
+                                        <Form.Control type="text" placeholder="Product Name" name="productName" value={warranty.productName} onChange={handleChange} />
+                                    </FloatingLabel>
                                 </Form.Group>
 
-                                <Form.Group as={Col} className="mb-3" controlId="formHorizontalEndDate">
-                                    <Form.Label column sm={2}>
-                                        End Date
-                                    </Form.Label>
-                                    <Form.Control type="date" placeholder="End Date" name="endDate" value={warranty.endDate} onChange={handleChange} />
+                                <Form.Group className="mb-3" controlId="formHorizontalWarrantyCategory">
+                                    <FloatingLabel
+                                        controlId="floatingInputWarrantyCategory"
+                                        label="Warranty Category"
+                                        className="mb-3"
+                                    >
+                                        <Form.Select name="warrantyCategory" value={warranty.warrantyCategory} onChange={handleChange} >
+                                            <option value="">- Warranty Category -</option>
+                                            {warrantyCategories.map(item => {
+                                                return (<option key={item.id} value={item.id}>{item.name}</option>);
+                                            }
+                                            )}
+                                        </Form.Select>
+                                    </FloatingLabel>
                                 </Form.Group>
-                            </Row>
 
-                            <Form.Group className="mb-3" controlId="formHorizontalRemark">
-                                <Form.Label column sm={2}>
-                                    Remark
-                                </Form.Label>
-                                <Form.Control type="text" placeholder="Remark" name="remark" value={warranty.remark} onChange={handleChange} />
-                            </Form.Group>
+                                <Form.Group className="mb-3" controlId="formHorizontalBrand">
+                                    <FloatingLabel
+                                        controlId="floatingInputBrand"
+                                        label="Brand"
+                                        className="mb-3"
+                                    >
+                                        <Form.Control type="text" placeholder="Brand" name="brand" value={warranty.brand} onChange={handleChange} />
+                                    </FloatingLabel>
+                                </Form.Group>
 
-                            <Form.Group className="mb-3">
-                                <Button onClick={handleAddWarranty}>Add Warranty</Button>
-                            </Form.Group>
-                        </Form>
+                                <Form.Group className="mb-3" controlId="formHorizontalModel">
+                                    <FloatingLabel
+                                        controlId="floatingInputModel"
+                                        label="Model"
+                                        className="mb-3"
+                                    >
+                                        <Form.Control type="text" placeholder="Model" name="model" value={warranty.model} onChange={handleChange} />
+                                    </FloatingLabel>
+                                </Form.Group>
+
+                                <Row className="mb-3">
+                                    <Form.Group as={Col} className="mb-3" controlId="formHorizontalStartDate">
+                                        <FloatingLabel
+                                            controlId="floatingInputStartDate"
+                                            label="Start Date"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="date" placeholder="Start Date" name="startDate" value={warranty.startDate} onChange={handleChange} />
+                                        </FloatingLabel>
+                                    </Form.Group>
+
+                                    <Form.Group as={Col} className="mb-3" controlId="formHorizontalEndDate">
+                                        <FloatingLabel
+                                            controlId="floatingInputEndDate"
+                                            label="End Date"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="date" placeholder="End Date" name="endDate" value={warranty.endDate} min={warranty.startDate} onChange={handleChange} />
+                                        </FloatingLabel>
+                                    </Form.Group>
+                                </Row>
+
+                                <Form.Group className="mb-3" controlId="formHorizontalRemark">
+                                    <FloatingLabel
+                                        controlId="floatingTextareaRemark"
+                                        label="Remark"
+                                        className="mb-3"
+                                    >
+                                        <Form.Control as="textarea" placeholder="Remark" name="remark" value={warranty.remark} onChange={handleChange} onKeyUp={handleKeyUp} maxLength={textareaMaxLength} style={{ height: "150px" }} />
+                                    </FloatingLabel>
+                                    <p>Characters left: <span id="lengthCounter">{textareaMaxLength}</span></p>
+                                </Form.Group>
+
+                                <div className="button-container">
+                                    <Button variant="secondary" className="button-back" onClick={handleBack}>
+                                        Back
+                                    </Button>
+
+                                    <Button variant="primary" className="button-add" onClick={handleAddWarranty}>
+                                        Add Warranty
+                                    </Button>
+                                </div>
+                            </Form>
+                        </div>
                     </div>
                 )
             }

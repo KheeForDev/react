@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
+
+// required for react toastify
+import "react-toastify/dist/ReactToastify.css";
 
 // required for react bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,6 +21,16 @@ root.render(
         <Routes>
           <Route path="/*" element={<App />} />
         </Routes>
+        <ToastContainer
+          position="bottom-right"
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
