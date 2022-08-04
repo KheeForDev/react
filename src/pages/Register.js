@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +11,8 @@ import * as constant from "../util/constant";
 import axios from "../util/axios";
 
 const Register = () => {
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState('');
     const [validUsername, setValidUsername] = useState(false);
     const [usernameFocus, setUsernameFocus] = useState(false);
@@ -52,7 +55,13 @@ const Register = () => {
                 })
             );
 
-            console.log(response);
+            const { data: message } = response;
+
+            toast.success(message, {
+                autoClose: 5000,
+            });
+
+            navigate("/login");
         } catch (err) {
             setErrMsg(err?.response);
         }
