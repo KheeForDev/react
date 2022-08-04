@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Card from 'react-bootstrap/Card';
 import { UilPlus } from '@iconscout/react-unicons'
 
@@ -22,10 +23,11 @@ const Warranty = () => {
                 }
             );
 
-            // console.log(response);
             setWarranties(response.data);
         } catch (err) {
-            console.log(err);
+            toast.error(err, {
+                autoClose: false,
+            });
         }
     };
 
@@ -35,6 +37,29 @@ const Warranty = () => {
 
     const handleAddWarrantyForm = () => {
         navigate("/addwarranty");
+    }
+
+    const deleteWarranty = async (id) => {
+        try {
+            const response = await axios.delete(constant.API_WARRANTY_DELETE + `/${id}`,
+                {
+                    headers: { 'Authorization': `Bearer ${auth.accessToken}` }
+                }
+            );
+
+            const { data: message } = response;
+
+            toast.success(message, {
+                autoClose: 5000,
+            });
+
+            getWarranties();
+        } catch (err) {
+            toast.error(err, {
+                autoClose: false,
+            });
+        }
+
     }
 
     return (
@@ -64,6 +89,7 @@ const Warranty = () => {
                                     id={warranty.id}
                                     productName={warranty.productName}
                                     brand={warranty.brand}
+                                    handleDelete={deleteWarranty}
                                 />
                             ))}
                         </div>
