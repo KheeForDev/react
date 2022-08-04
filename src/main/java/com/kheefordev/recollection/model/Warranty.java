@@ -3,17 +3,15 @@ package com.kheefordev.recollection.model;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Warranty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	private String productName;
 	private Long warrantyCategoryId;
 	private String brand;
@@ -30,7 +28,7 @@ public class Warranty {
 
 	}
 
-	public Warranty(Long id, String productName, Long warrantyCategoryId, String brand, String model,
+	public Warranty(int id, String productName, Long warrantyCategoryId, String brand, String model,
 			Timestamp startDate, Timestamp endDate, String remark, String createdBy, Timestamp createdOn,
 			String updatedBy, Timestamp updatedOn) {
 		super();
@@ -48,11 +46,11 @@ public class Warranty {
 		this.updatedOn = updatedOn;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

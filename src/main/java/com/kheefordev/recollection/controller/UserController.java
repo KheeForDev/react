@@ -58,7 +58,7 @@ public class UserController {
 			ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Unable to create user");
 		}
 
-		return ResponseEntity.status(HttpStatus.CREATED).body("You have signed up successfully");
+		return ResponseEntity.status(HttpStatus.CREATED).body("You have registered successfully");
 	}
 
 	@PostMapping("/role/save")
