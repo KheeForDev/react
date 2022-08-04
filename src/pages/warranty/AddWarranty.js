@@ -29,7 +29,9 @@ const AddWarranty = () => {
 
             setWarrantyCategories(response.data);
         } catch (err) {
-            console.log(err);
+            toast.error(err, {
+                autoClose: false,
+            });
         }
     };
 
@@ -67,7 +69,9 @@ const AddWarranty = () => {
 
             navigate("/warranty");
         } catch (err) {
-            console.log(err);
+            toast.error(err, {
+                autoClose: false,
+            });
         }
     };
 

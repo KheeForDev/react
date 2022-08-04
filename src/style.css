@@ -144,6 +144,18 @@ body {
     margin: 20px 10px 10px 0;
 }
 
+/* WARRANTY CARD */
+.warranty-container svg {
+    height: 20px;
+    width: 20px;
+}
+
+.warranty-container button {
+    width: 100%;
+    margin: 0 5px;
+    font-size: 10px;
+}
+
 /* ADD WARRANTY */
 .form-container .form-warranty {
     width: 50%;
