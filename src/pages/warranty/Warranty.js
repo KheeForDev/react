@@ -33,11 +33,11 @@ const Warranty = () => {
 
     useEffect(() => {
         getWarranties();
-    }, [])
+    }, []);
 
     const handleAddWarrantyForm = () => {
         navigate("/addwarranty");
-    }
+    };
 
     const deleteWarranty = async (id) => {
         try {
@@ -59,8 +59,7 @@ const Warranty = () => {
                 autoClose: false,
             });
         }
-
-    }
+    };
 
     return (
         <>
