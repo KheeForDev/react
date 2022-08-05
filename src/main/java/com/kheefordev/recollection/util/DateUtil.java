@@ -14,18 +14,25 @@ public class DateUtil {
 	private static final Logger log = LogManager.getLogger(DateUtil.class);
 
 	public Timestamp formatStringToTimestamp(String strDate, String format) {
-		if (strDate != "" && format != "") {
-			Date date = null;
+		if (strDate == "" || format == "")
+			return null;
 
-			try {
-				date = new SimpleDateFormat(format).parse(strDate);
-			} catch (ParseException e) {
-				log.error(e.getMessage());
-			}
+		Date date = null;
 
-			return new Timestamp(date.getTime());
+		try {
+			date = new SimpleDateFormat(format).parse(strDate);
+		} catch (ParseException e) {
+			log.error(e.getMessage());
 		}
 
-		return null;
+		return new Timestamp(date.getTime());
+	}
+
+	public String formatTimestampToString(Timestamp timestamp, String format) {
+		if (timestamp == null || format == "")
+			return null;
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+		return simpleDateFormat.format(timestamp);
 	}
 }
