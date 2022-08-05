@@ -17,6 +17,9 @@ public class Properties {
 	@Value("${wnty.update.msg}")
 	private String wntyUpdateMsg;
 
+	@Value("${wnty.retrieve.notfound.error}")
+	private String wntyRetrieveNotfoundError;
+
 	@Value("${wnty.retrieve.forbidden.error}")
 	private String wntyRetrieveForbiddenError;
 
@@ -59,6 +62,14 @@ public class Properties {
 
 	public void setWntyUpdateMsg(String wntyUpdateMsg) {
 		this.wntyUpdateMsg = wntyUpdateMsg;
+	}
+
+	public String getWntyRetrieveNotfoundError() {
+		return wntyRetrieveNotfoundError;
+	}
+
+	public void setWntyRetrieveNotfoundError(String wntyRetrieveNotfoundError) {
+		this.wntyRetrieveNotfoundError = wntyRetrieveNotfoundError;
 	}
 
 	public String getWntyRetrieveForbiddenError() {

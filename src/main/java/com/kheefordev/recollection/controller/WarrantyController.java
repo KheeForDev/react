@@ -1,6 +1,7 @@
 package com.kheefordev.recollection.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +27,7 @@ import com.kheefordev.recollection.dto.WarrantyRequestDto;
 import com.kheefordev.recollection.dto.WarrantyResponseDto;
 import com.kheefordev.recollection.model.Properties;
 import com.kheefordev.recollection.model.Warranty;
+import com.kheefordev.recollection.model.WarrantyCategory;
 import com.kheefordev.recollection.service.WarrantyService;
 import com.kheefordev.recollection.util.DateUtil;
 import com.kheefordev.recollection.util.JwtUtil;
@@ -49,11 +51,21 @@ public class WarrantyController {
 	private Properties properties;
 
 	@GetMapping("/warranties")
-	public ResponseEntity<List<Warranty>> getWarranties(@RequestHeader HttpHeaders headers) {
+	public ResponseEntity<List<WarrantyResponseDto>> getWarranties(@RequestHeader HttpHeaders headers) {
 		String username = getUsernameFromHeaders(headers);
 
 		List<Warranty> warranties = warrantyService.getWarranties(username);
-		return ResponseEntity.status(HttpStatus.OK).body(warranties);
+		List<WarrantyResponseDto> warrantiesDto = new ArrayList<WarrantyResponseDto>();
+
+		for (Warranty warranty : warranties) {
+			WarrantyResponseDto warrantyResponseDto = new WarrantyResponseDto();
+			warrantyResponseDto.setId(warranty.getId());
+			warrantyResponseDto.setProductName(warranty.getProductName());
+			warrantyResponseDto.setBrand(warranty.getBrand());
+			warrantiesDto.add(warrantyResponseDto);
+		}
+
+		return ResponseEntity.status(HttpStatus.OK).body(warrantiesDto);
 	}
 
 	@GetMapping("/warranty/get/{id}")
@@ -64,21 +76,22 @@ public class WarrantyController {
 
 		Warranty warranty = warrantyService.getWarrantyById(id);
 
-		try {
-			System.out.println(mapper.writeValueAsString(warranty));
-		} catch (JsonProcessingException e) {
-		}
+		if (warranty == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(properties.getWntyRetrieveNotfoundError());
 
 		if (warranty != null && !warranty.getCreatedBy().equalsIgnoreCase(username))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(properties.getWntyRetrieveForbiddenError());
 
+		WarrantyCategory warrantyCategory = warrantyService.getWarrantyCategoryById(warranty.getWarrantyCategoryId());
+
 		WarrantyResponseDto warrantyResponseDto = new WarrantyResponseDto();
+		warrantyResponseDto.setId(warranty.getId());
 		warrantyResponseDto.setProductName(warranty.getProductName());
-		warrantyResponseDto.setWarrantyCategory(String.valueOf(warranty.getWarrantyCategoryId()));
+		warrantyResponseDto.setWarrantyCategoryName(warrantyCategory.getName());
 		warrantyResponseDto.setBrand(warranty.getBrand());
 		warrantyResponseDto.setModel(warranty.getModel());
-//		warrantyResponseDto.setStartDate(warranty.getStartDate());
-//		warrantyResponseDto.setEndDate(warranty.getEndDate());
+		warrantyResponseDto.setStartDate(dateUtil.formatTimestampToString(warranty.getStartDate(), "yyyy-MM-dd"));
+		warrantyResponseDto.setEndDate(dateUtil.formatTimestampToString(warranty.getEndDate(), "yyyy-MM-dd"));
 		warrantyResponseDto.setRemark(warranty.getRemark());
 
 		try {
@@ -97,7 +110,7 @@ public class WarrantyController {
 
 		Warranty warranty = new Warranty();
 		warranty.setProductName(warrantyRequestDto.getProductName());
-		warranty.setWarrantyCategoryId(Long.valueOf(warrantyRequestDto.getWarrantyCategory()));
+		warranty.setWarrantyCategoryId(Integer.valueOf(warrantyRequestDto.getWarrantyCategory()));
 		warranty.setBrand(warrantyRequestDto.getBrand());
 		warranty.setModel(warrantyRequestDto.getModel());
 		warranty.setStartDate(dateUtil.formatStringToTimestamp(warrantyRequestDto.getStartDate(), "yyyy-MM-dd"));

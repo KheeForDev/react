@@ -1,8 +1,14 @@
 package com.kheefordev.recollection.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class WarrantyResponseDto {
+	private int id;
 	private String productName;
 	private String warrantyCategory;
+	private String warrantyCategoryName;
 	private String brand;
 	private String model;
 	private String startDate;
@@ -13,16 +19,26 @@ public class WarrantyResponseDto {
 
 	}
 
-	public WarrantyResponseDto(String productName, String warrantyCategory, String brand, String model, String startDate,
-			String endDate, String remark) {
+	public WarrantyResponseDto(int id, String productName, String warrantyCategory, String warrantyCategoryName,
+			String brand, String model, String startDate, String endDate, String remark) {
 		super();
+		this.id = id;
 		this.productName = productName;
 		this.warrantyCategory = warrantyCategory;
+		this.warrantyCategoryName = warrantyCategoryName;
 		this.brand = brand;
 		this.model = model;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.remark = remark;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getProductName() {
@@ -39,6 +55,14 @@ public class WarrantyResponseDto {
 
 	public void setWarrantyCategory(String warrantyCategory) {
 		this.warrantyCategory = warrantyCategory;
+	}
+
+	public String getWarrantyCategoryName() {
+		return warrantyCategoryName;
+	}
+
+	public void setWarrantyCategoryName(String warrantyCategoryName) {
+		this.warrantyCategoryName = warrantyCategoryName;
 	}
 
 	public String getBrand() {
