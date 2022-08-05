@@ -13,7 +13,7 @@ public class Warranty {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String productName;
-	private Long warrantyCategoryId;
+	private int warrantyCategoryId;
 	private String brand;
 	private String model;
 	private Timestamp startDate;
@@ -28,9 +28,9 @@ public class Warranty {
 
 	}
 
-	public Warranty(int id, String productName, Long warrantyCategoryId, String brand, String model,
-			Timestamp startDate, Timestamp endDate, String remark, String createdBy, Timestamp createdOn,
-			String updatedBy, Timestamp updatedOn) {
+	public Warranty(int id, String productName, int warrantyCategoryId, String brand, String model, Timestamp startDate,
+			Timestamp endDate, String remark, String createdBy, Timestamp createdOn, String updatedBy,
+			Timestamp updatedOn) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -62,11 +62,11 @@ public class Warranty {
 		this.productName = productName;
 	}
 
-	public Long getWarrantyCategoryId() {
+	public int getWarrantyCategoryId() {
 		return warrantyCategoryId;
 	}
 
-	public void setWarrantyCategoryId(Long warrantyCategoryId) {
+	public void setWarrantyCategoryId(int warrantyCategoryId) {
 		this.warrantyCategoryId = warrantyCategoryId;
 	}
 

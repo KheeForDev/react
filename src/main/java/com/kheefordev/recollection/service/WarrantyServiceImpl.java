@@ -33,6 +33,13 @@ public class WarrantyServiceImpl implements WarrantyService {
 	}
 
 	@Override
+	public WarrantyCategory getWarrantyCategoryById(int id) {
+		log.info("Fetching warranty category - id : {}", id);
+		WarrantyCategory warrantyCategory = warrantyCategoryRepository.findById(id).orElse(null);
+		return warrantyCategory;
+	}
+
+	@Override
 	public List<Warranty> getWarranties(String username) {
 		log.info("Fetching all warranties");
 		return warrantyRepository.findByCreatedBy(username);

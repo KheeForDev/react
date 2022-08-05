@@ -7,6 +7,8 @@ import com.kheefordev.recollection.model.WarrantyCategory;
 
 public interface WarrantyService {
 	public List<WarrantyCategory> getWarrantyCategories();
+	
+	public WarrantyCategory getWarrantyCategoryById(int id);
 
 	public List<Warranty> getWarranties(String username);
 

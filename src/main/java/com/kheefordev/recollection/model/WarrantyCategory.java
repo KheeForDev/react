@@ -11,18 +11,18 @@ import javax.persistence.Id;
 public class WarrantyCategory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private int id;
 	private String name;
 	private String createdBy;
 	private Timestamp createdOn;
 	private String updatedBy;
 	private Timestamp updatedOn;
-	
-	public WarrantyCategory () {
-		
+
+	public WarrantyCategory() {
+
 	}
 
-	public WarrantyCategory(Long id, String name, String createdBy, Timestamp createdOn, String updatedBy,
+	public WarrantyCategory(int id, String name, String createdBy, Timestamp createdOn, String updatedBy,
 			Timestamp updatedOn) {
 		super();
 		this.id = id;
@@ -33,11 +33,11 @@ public class WarrantyCategory {
 		this.updatedOn = updatedOn;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
