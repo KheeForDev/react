@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -14,8 +15,9 @@ import useAuth from "../hook/useAuth";
 import axios from "../util/axios";
 import img_placeholder from "../asserts/images/286x180.jpg";
 
-const WarrantyCard = ({ id, productName, brand, handleDelete }) => {
+const WarrantyCard = ({ id, productName, brand, status, statusColorCode, handleDelete }) => {
     const { auth } = useAuth();
+    const navigate = useNavigate();
     const [warranty, setWarranty] = useState({});
     const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -27,19 +29,23 @@ const WarrantyCard = ({ id, productName, brand, handleDelete }) => {
 
     const handleViewDialog = async () => {
         try {
-            const response = await axios.get(constant.API_WARRANTY_GET + `/${id}`,
+            const response = await axios.get(constant.API_WARRANTY_GET + `${id}`,
                 {
                     headers: { 'Authorization': `Bearer ${auth.accessToken}` }
                 }
             );
 
-            setWarranty(response?.data);
+            setWarranty(response.data);
             handleOpenViewDialog();
         } catch (err) {
             toast.error(err, {
                 autoClose: false,
             });
         }
+    }
+
+    const handleEdit = () => {
+        navigate(`/updatewarranty/${id}`)
     }
 
     const handleConfirmDelete = () => {
@@ -52,7 +58,7 @@ const WarrantyCard = ({ id, productName, brand, handleDelete }) => {
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={img_placeholder} />
                 <Card.Body>
-                    <Card.Title>{productName}</Card.Title>
+                    <Card.Title>{productName} <span className="warranty-status" style={{backgroundColor: `${statusColorCode}`, color: "white"}}>{status}</span></Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{brand}</Card.Subtitle>
                     <div className="button-container">
                         <Button variant="secondary" className="button-view" onClick={handleViewDialog}>
@@ -60,7 +66,7 @@ const WarrantyCard = ({ id, productName, brand, handleDelete }) => {
                             View
                         </Button>
 
-                        <Button variant="primary" className="button-edit">
+                        <Button variant="primary" className="button-edit" onClick={handleEdit}>
                             <UilEdit /><br />
                             Edit
                         </Button>

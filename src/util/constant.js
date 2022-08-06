@@ -14,7 +14,7 @@ export const API_REGISTER = "/user/save";
 export const API_WARRANTY_CATEGORIES = "/warrantycategories"
 
 export const API_WARRANTIES = "/warranties";
-export const API_WARRANTY_GET = "/warranty/get"
+export const API_WARRANTY_GET = "/warranty/get/"
 export const API_WARRANTY_ADD = "/warranty/add";
-export const API_WARRANTY_DELETE = "/warranty/delete";
-export const API_WARRANTY_UPDATE = "/warranty/update";
+export const API_WARRANTY_DELETE = "/warranty/delete/";
+export const API_WARRANTY_UPDATE = "/warranty/update/";

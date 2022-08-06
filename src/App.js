@@ -10,6 +10,7 @@ import Unauthorized from "./pages/Unauthorized"
 import About from "./pages/About";
 import Warranty from "./pages/warranty/Warranty";
 import AddWarranty from "./pages/warranty/AddWarranty";
+import UpdateWarranty from "./pages/warranty/UpdateWarranty"
 import Setting from "./pages/Setting";
 import Missing from "./pages/Missing";
 
@@ -34,6 +35,10 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
           <Route path="/addwarranty" element={<AddWarranty />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={["ROLE_USER"]} />}>
+          <Route path="/updatewarranty/:id" element={<UpdateWarranty />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["ROLE_ADMIN"]} />}>

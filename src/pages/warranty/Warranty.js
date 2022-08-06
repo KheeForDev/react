@@ -41,7 +41,7 @@ const Warranty = () => {
 
     const deleteWarranty = async (id) => {
         try {
-            const response = await axios.delete(constant.API_WARRANTY_DELETE + `/${id}`,
+            const response = await axios.delete(constant.API_WARRANTY_DELETE + `${id}`,
                 {
                     headers: { 'Authorization': `Bearer ${auth.accessToken}` }
                 }
@@ -88,6 +88,8 @@ const Warranty = () => {
                                     id={warranty.id}
                                     productName={warranty.productName}
                                     brand={warranty.brand}
+                                    status={warranty.status}
+                                    statusColorCode={warranty.statusColorCode}
                                     handleDelete={deleteWarranty}
                                 />
                             ))}
