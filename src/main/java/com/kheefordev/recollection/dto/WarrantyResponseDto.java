@@ -14,13 +14,16 @@ public class WarrantyResponseDto {
 	private String startDate;
 	private String endDate;
 	private String remark;
+	private String status;
+	private String statusColorCode;
 
 	public WarrantyResponseDto() {
 
 	}
 
 	public WarrantyResponseDto(int id, String productName, String warrantyCategory, String warrantyCategoryName,
-			String brand, String model, String startDate, String endDate, String remark) {
+			String brand, String model, String startDate, String endDate, String remark, String status,
+			String statusColorCode) {
 		super();
 		this.id = id;
 		this.productName = productName;
@@ -31,6 +34,8 @@ public class WarrantyResponseDto {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.remark = remark;
+		this.status = status;
+		this.statusColorCode = statusColorCode;
 	}
 
 	public int getId() {
@@ -103,5 +108,21 @@ public class WarrantyResponseDto {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getStatusColorCode() {
+		return statusColorCode;
+	}
+
+	public void setStatusColorCode(String statusColorCode) {
+		this.statusColorCode = statusColorCode;
 	}
 }

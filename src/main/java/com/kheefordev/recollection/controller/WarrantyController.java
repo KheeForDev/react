@@ -2,6 +2,7 @@ package com.kheefordev.recollection.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,7 @@ import com.kheefordev.recollection.model.Warranty;
 import com.kheefordev.recollection.model.WarrantyCategory;
 import com.kheefordev.recollection.service.WarrantyService;
 import com.kheefordev.recollection.util.DateUtil;
+import com.kheefordev.recollection.util.HelperUtil;
 import com.kheefordev.recollection.util.JwtUtil;
 
 @CrossOrigin
@@ -46,6 +48,9 @@ public class WarrantyController {
 
 	@Autowired
 	private DateUtil dateUtil;
+	
+	@Autowired
+	private HelperUtil helperUtil;
 
 	@Autowired
 	private Properties properties;
@@ -62,6 +67,14 @@ public class WarrantyController {
 			warrantyResponseDto.setId(warranty.getId());
 			warrantyResponseDto.setProductName(warranty.getProductName());
 			warrantyResponseDto.setBrand(warranty.getBrand());
+			
+			// get warranty status
+			HashMap<String, String> hashMap = new HashMap<String, String>();
+			hashMap = helperUtil.getWarrantyStatus(warranty.getEndDate());
+			
+			warrantyResponseDto.setStatus(hashMap.get("status"));
+			warrantyResponseDto.setStatusColorCode(hashMap.get("statusColorCode"));
+			
 			warrantiesDto.add(warrantyResponseDto);
 		}
 
@@ -87,6 +100,7 @@ public class WarrantyController {
 		WarrantyResponseDto warrantyResponseDto = new WarrantyResponseDto();
 		warrantyResponseDto.setId(warranty.getId());
 		warrantyResponseDto.setProductName(warranty.getProductName());
+		warrantyResponseDto.setWarrantyCategory(String.valueOf(warranty.getWarrantyCategoryId()));
 		warrantyResponseDto.setWarrantyCategoryName(warrantyCategory.getName());
 		warrantyResponseDto.setBrand(warranty.getBrand());
 		warrantyResponseDto.setModel(warranty.getModel());
@@ -115,6 +129,7 @@ public class WarrantyController {
 		warranty.setModel(warrantyRequestDto.getModel());
 		warranty.setStartDate(dateUtil.formatStringToTimestamp(warrantyRequestDto.getStartDate(), "yyyy-MM-dd"));
 		warranty.setEndDate(dateUtil.formatStringToTimestamp(warrantyRequestDto.getEndDate(), "yyyy-MM-dd"));
+		warranty.setRemark(warrantyRequestDto.getRemark());
 		warranty.setCreatedBy(username);
 		warranty.setCreatedOn(new Timestamp(System.currentTimeMillis()));
 		warranty.setUpdatedBy(username);
@@ -143,16 +158,16 @@ public class WarrantyController {
 
 	@PutMapping("/warranty/update/{id}")
 	public ResponseEntity<String> updateNote(@RequestHeader HttpHeaders headers, @PathVariable(value = "id") int id,
-			@RequestBody Warranty warranty) {
+			@RequestBody WarrantyRequestDto warrantyRequestDto) {
 		String username = getUsernameFromHeaders(headers);
 		StringBuilder sbError = new StringBuilder();
 
-		Warranty existWarranty = warrantyService.getWarrantyById(id);
+		Warranty warranty = warrantyService.getWarrantyById(id);
 
-		if (existWarranty == null)
+		if (warranty == null)
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(properties.getWntyUpdateNotfoundError());
 
-		if (!existWarranty.getCreatedBy().equalsIgnoreCase(username))
+		if (!warranty.getCreatedBy().equalsIgnoreCase(username))
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(properties.getWntyUpdateForbiddenError());
 
 		// Code logic to perform validation
@@ -161,8 +176,16 @@ public class WarrantyController {
 		if (sbError.length() > 0)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sbError.toString());
 
-		warranty.setUpdatedBy("User");
+		warranty.setProductName(warrantyRequestDto.getProductName());
+		warranty.setWarrantyCategoryId(Integer.valueOf(warrantyRequestDto.getWarrantyCategory()));
+		warranty.setBrand(warrantyRequestDto.getBrand());
+		warranty.setModel(warrantyRequestDto.getModel());
+		warranty.setStartDate(dateUtil.formatStringToTimestamp(warrantyRequestDto.getStartDate(), "yyyy-MM-dd"));
+		warranty.setEndDate(dateUtil.formatStringToTimestamp(warrantyRequestDto.getEndDate(), "yyyy-MM-dd"));
+		warranty.setRemark(warrantyRequestDto.getRemark());
+		warranty.setUpdatedBy(username);
 		warranty.setUpdatedOn(new Timestamp(System.currentTimeMillis()));
+
 
 		warrantyService.updateNote(warranty);
 		return ResponseEntity.status(HttpStatus.OK).body(properties.getWntyUpdateMsg());

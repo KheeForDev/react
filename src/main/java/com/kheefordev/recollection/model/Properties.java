@@ -32,6 +32,24 @@ public class Properties {
 	@Value("${wnty.update.notfound.error}")
 	private String wntyUpdateNotfoundError;
 
+	@Value("${wnty.status.valid}")
+	private String wntyStatusValid;
+
+	@Value("${wnty.status.valid.color}")
+	private String wntyStatusValidColor;
+
+	@Value("${wnty.status.expiring}")
+	private String wntyStatusExpiring;
+
+	@Value("${wnty.status.expiring.color}")
+	private String wntyStatusExpiringColor;
+
+	@Value("${wnty.status.expired}")
+	private String wntyStatusExpired;
+
+	@Value("${wnty.status.expired.color}")
+	private String wntyStatusExpiredColor;
+
 	public String getJwtSecret() {
 		return jwtSecret;
 	}
@@ -102,5 +120,53 @@ public class Properties {
 
 	public void setWntyUpdateNotfoundError(String wntyUpdateNotfoundError) {
 		this.wntyUpdateNotfoundError = wntyUpdateNotfoundError;
+	}
+
+	public String getWntyStatusValid() {
+		return wntyStatusValid;
+	}
+
+	public void setWntyStatusValid(String wntyStatusValid) {
+		this.wntyStatusValid = wntyStatusValid;
+	}
+
+	public String getWntyStatusValidColor() {
+		return wntyStatusValidColor;
+	}
+
+	public void setWntyStatusValidColor(String wntyStatusValidColor) {
+		this.wntyStatusValidColor = wntyStatusValidColor;
+	}
+
+	public String getWntyStatusExpiring() {
+		return wntyStatusExpiring;
+	}
+
+	public void setWntyStatusExpiring(String wntyStatusExpiring) {
+		this.wntyStatusExpiring = wntyStatusExpiring;
+	}
+
+	public String getWntyStatusExpiringColor() {
+		return wntyStatusExpiringColor;
+	}
+
+	public void setWntyStatusExpiringColor(String wntyStatusExpiringColor) {
+		this.wntyStatusExpiringColor = wntyStatusExpiringColor;
+	}
+
+	public String getWntyStatusExpired() {
+		return wntyStatusExpired;
+	}
+
+	public void setWntyStatusExpired(String wntyStatusExpired) {
+		this.wntyStatusExpired = wntyStatusExpired;
+	}
+
+	public String getWntyStatusExpiredColor() {
+		return wntyStatusExpiredColor;
+	}
+
+	public void setWntyStatusExpiredColor(String wntyStatusExpiredColor) {
+		this.wntyStatusExpiredColor = wntyStatusExpiredColor;
 	}
 }
