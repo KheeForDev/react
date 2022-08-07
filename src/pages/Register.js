@@ -63,7 +63,7 @@ const Register = () => {
 
             navigate("/login");
         } catch (err) {
-            setErrMsg(err?.response);
+            setErrMsg(err?.response?.data);
         }
     };
 
