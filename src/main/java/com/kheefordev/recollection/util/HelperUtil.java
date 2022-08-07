@@ -20,26 +20,23 @@ public class HelperUtil {
 		Date currentDate = new Date();
 		Date endDate = new Date(timestamp.getTime());
 
-		if (currentDate.compareTo(endDate) == -1) {
-			hashMap.put("status", properties.getWntyStatusExpired());
-			hashMap.put("statusColorCode", properties.getWntyStatusExpiredColor());
-			return hashMap;
-		}
-
 		Long currentMilliseconds = currentDate.getTime();
 		Long endMilliseconds = endDate.getTime();
 
 		long timeDiff = 0;
-		timeDiff = currentMilliseconds - endMilliseconds;
+		timeDiff = endMilliseconds - currentMilliseconds;
 
 		int dayDiff = (int) (timeDiff / (1000 * 60 * 60 * 24));
 
-		if (dayDiff > 7) {
-			hashMap.put("status", properties.getWntyStatusValid());
-			hashMap.put("statusColorCode", properties.getWntyStatusValidColor());
-		} else {
+		if (dayDiff <= -1) {
+			hashMap.put("status", properties.getWntyStatusExpired());
+			hashMap.put("statusColorCode", properties.getWntyStatusExpiredColor());
+		} else if (dayDiff >= 0 && dayDiff < 7) {
 			hashMap.put("status", properties.getWntyStatusExpiring());
 			hashMap.put("statusColorCode", properties.getWntyStatusExpiringColor());
+		} else {
+			hashMap.put("status", properties.getWntyStatusValid());
+			hashMap.put("statusColorCode", properties.getWntyStatusValidColor());
 		}
 
 		return hashMap;

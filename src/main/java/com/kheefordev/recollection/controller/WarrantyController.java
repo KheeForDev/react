@@ -48,7 +48,7 @@ public class WarrantyController {
 
 	@Autowired
 	private DateUtil dateUtil;
-	
+
 	@Autowired
 	private HelperUtil helperUtil;
 
@@ -67,14 +67,14 @@ public class WarrantyController {
 			warrantyResponseDto.setId(warranty.getId());
 			warrantyResponseDto.setProductName(warranty.getProductName());
 			warrantyResponseDto.setBrand(warranty.getBrand());
-			
+
 			// get warranty status
 			HashMap<String, String> hashMap = new HashMap<String, String>();
 			hashMap = helperUtil.getWarrantyStatus(warranty.getEndDate());
-			
+
 			warrantyResponseDto.setStatus(hashMap.get("status"));
 			warrantyResponseDto.setStatusColorCode(hashMap.get("statusColorCode"));
-			
+
 			warrantiesDto.add(warrantyResponseDto);
 		}
 
@@ -107,6 +107,13 @@ public class WarrantyController {
 		warrantyResponseDto.setStartDate(dateUtil.formatTimestampToString(warranty.getStartDate(), "yyyy-MM-dd"));
 		warrantyResponseDto.setEndDate(dateUtil.formatTimestampToString(warranty.getEndDate(), "yyyy-MM-dd"));
 		warrantyResponseDto.setRemark(warranty.getRemark());
+
+		// get warranty status
+		HashMap<String, String> hashMap = new HashMap<String, String>();
+		hashMap = helperUtil.getWarrantyStatus(warranty.getEndDate());
+
+		warrantyResponseDto.setStatus(hashMap.get("status"));
+		warrantyResponseDto.setStatusColorCode(hashMap.get("statusColorCode"));
 
 		try {
 			responseDto = mapper.writeValueAsString(warrantyResponseDto);
@@ -185,7 +192,6 @@ public class WarrantyController {
 		warranty.setRemark(warrantyRequestDto.getRemark());
 		warranty.setUpdatedBy(username);
 		warranty.setUpdatedOn(new Timestamp(System.currentTimeMillis()));
-
 
 		warrantyService.updateNote(warranty);
 		return ResponseEntity.status(HttpStatus.OK).body(properties.getWntyUpdateMsg());
