@@ -17,7 +17,7 @@ import img_placeholder from "../asserts/images/286x180.jpg";
 import Loading from "./Loading";
 
 const WarrantyCard = ({ id, productName, brand, status, statusColorCode, handleDelete }) => {
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const [warranty, setWarranty] = useState();
     const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
@@ -46,6 +46,7 @@ const WarrantyCard = ({ id, productName, brand, status, statusColorCode, handleD
             });
 
             if (statusCode === 401 || statusCode === 403) {
+                setAuth({});
                 navigate("/login");
             };
         }

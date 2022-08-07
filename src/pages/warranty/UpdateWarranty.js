@@ -13,7 +13,7 @@ import useAuth from "../../hook/useAuth";
 import axios from "../../util/axios";
 
 const AddWarranty = () => {
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const { id } = useParams();
     const textareaMaxLength = constant.TEXTAREA_MAX_LENGTH;
@@ -38,6 +38,7 @@ const AddWarranty = () => {
             });
 
             if (statusCode === 401 || statusCode === 403) {
+                setAuth({});
                 navigate("/login");
             };
         }
@@ -61,6 +62,7 @@ const AddWarranty = () => {
             });
 
             if (statusCode === 401 || statusCode === 403) {
+                setAuth({});
                 navigate("/login");
             };
         }
@@ -109,6 +111,7 @@ const AddWarranty = () => {
             });
 
             if (statusCode === 401 || statusCode === 403) {
+                setAuth({});
                 navigate("/login");
             };
         }

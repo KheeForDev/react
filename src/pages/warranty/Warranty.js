@@ -11,7 +11,7 @@ import useAuth from "../../hook/useAuth";
 import axios from "../../util/axios";
 
 const Warranty = () => {
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
     const navigate = useNavigate();
     const [warranties, setWarranties] = useState();
 
@@ -33,6 +33,7 @@ const Warranty = () => {
             });
 
             if (statusCode === 401 || statusCode === 403) {
+                setAuth({});
                 navigate("/login");
             };
         }
@@ -70,6 +71,7 @@ const Warranty = () => {
             });
 
             if (statusCode === 401 || statusCode === 403) {
+                setAuth({});
                 navigate("/login");
             };
         }
