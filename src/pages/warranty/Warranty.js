@@ -25,9 +25,16 @@ const Warranty = () => {
 
             setWarranties(response.data);
         } catch (err) {
-            toast.error(err, {
+            const { message } = err;
+            const { response: { status: statusCode } } = err;
+
+            toast.error(message, {
                 autoClose: false,
             });
+
+            if (statusCode === 401 || statusCode === 403) {
+                navigate("/login");
+            };
         }
     };
 
@@ -55,9 +62,16 @@ const Warranty = () => {
 
             getWarranties();
         } catch (err) {
-            toast.error(err, {
+            const { message } = err;
+            const { response: { status: statusCode } } = err;
+
+            toast.error(message, {
                 autoClose: false,
             });
+
+            if (statusCode === 401 || statusCode === 403) {
+                navigate("/login");
+            };
         }
     };
 
