@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { UilCheck, UilTimes, UilInfoCircle } from "@iconscout/react-unicons";
 
 import Footer from "../components/Footer";
 import * as constant from "../util/constant";
@@ -76,8 +75,8 @@ const Register = () => {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
                             <Form.Label>Username</Form.Label>
-                            <FontAwesomeIcon icon={faCheck} className={validUsername ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validUsername || !username ? "hide" : "invalid"} />
+                            <UilCheck className={validUsername ? "valid" : "hide"} />
+                            <UilTimes className={validUsername || !username ? "hide" : "invalid"} />
                             <Form.Control
                                 type="text"
                                 placeholder="Username"
@@ -87,7 +86,7 @@ const Register = () => {
                                 required
                             />
                             <p className={usernameFocus && username && !validUsername ? "instructions" : "hide"}>
-                                <FontAwesomeIcon icon={faInfoCircle} />
+                                <UilInfoCircle />
                                 4 to 24 characters.<br />
                                 Must begin with a letter.<br />
                                 Letters, numbers, underscores, hyphens allowed.
@@ -96,8 +95,8 @@ const Register = () => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Password</Form.Label>
-                            <FontAwesomeIcon icon={faCheck} className={validPassword ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validPassword || !password ? "hide" : "invalid"} />
+                            <UilCheck className={validPassword ? "valid" : "hide"} />
+                            <UilTimes className={validPassword || !password ? "hide" : "invalid"} />
                             <Form.Control
                                 type="password"
                                 placeholder="Password"
@@ -106,7 +105,7 @@ const Register = () => {
                                 onFocus={() => setPasswordFocus(true)}
                             />
                             <p className={passwordFocus && password && !validPassword ? "instructions" : "hide"}>
-                                <FontAwesomeIcon icon={faInfoCircle} />
+                                <UilInfoCircle />
                                 8 to 24 characters.<br />
                                 Must include uppercase and lowercase letters, a number and a special character.<br />
                                 Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
@@ -115,8 +114,8 @@ const Register = () => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Confirm Password</Form.Label>
-                            <FontAwesomeIcon icon={faCheck} className={validMatch && matchPassword ? "valid" : "hide"} />
-                            <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPassword ? "hide" : "invalid"} />
+                            <UilCheck className={validMatch && matchPassword ? "valid" : "hide"} />
+                            <UilTimes className={validMatch || !matchPassword ? "hide" : "invalid"} />
                             <Form.Control
                                 type="password"
                                 placeholder="Confirm Password"
@@ -125,7 +124,7 @@ const Register = () => {
                                 onFocus={() => setMatchFocus(true)}
                             />
                             <p id="confirmnote" className={matchFocus && matchPassword && !validMatch ? "instructions" : "hide"}>
-                                <FontAwesomeIcon icon={faInfoCircle} />
+                                <UilInfoCircle />
                                 Must match the first password input field.
                             </p>
                         </Form.Group>

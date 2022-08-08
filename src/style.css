@@ -201,6 +201,8 @@ body {
 
 .instructions>svg {
     margin-right: 0.25rem;
+    height: 1rem;
+    width: 1rem;
 }
 
 .hide {
