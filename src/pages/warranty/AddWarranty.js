@@ -17,7 +17,16 @@ const AddWarranty = () => {
     const navigate = useNavigate();
     const textareaMaxLength = constant.TEXTAREA_MAX_LENGTH;
     const [warrantyCategories, setWarrantyCategories] = useState();
-    const [warranty, setWarranty] = useState({});
+    const [warranty, setWarranty] = useState({
+        productName: "",
+        warrantyCategory: "",
+        brand: "",
+        model: "",
+        startDate: "",
+        endDate: "",
+        remark: ""
+    });
+    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const getWarrantyCategories = async () => {
         try {
@@ -46,6 +55,12 @@ const AddWarranty = () => {
     useEffect(() => {
         getWarrantyCategories();
     }, []);
+
+    // enable button when all fields are filled up
+    useEffect(() => {
+        if (warranty.productName !== "" && warranty.warrantyCategory !== "" && warranty.brand !== "" && warranty.model !== "" && warranty.startDate !== "" && warranty.endDate !== "" && warranty.remark !== "")
+            setButtonDisabled(false);
+    }, [warranty]);
 
     const handleKeyUp = (e) => {
         const counterElement = document.getElementById("lengthCounter")
@@ -191,7 +206,7 @@ const AddWarranty = () => {
                                         Back
                                     </Button>
 
-                                    <Button variant="primary" className="button-add" onClick={handleAddWarranty}>
+                                    <Button variant="primary" className="button-add" onClick={handleAddWarranty} disabled={buttonDisabled}>
                                         Add Warranty
                                     </Button>
                                 </div>
