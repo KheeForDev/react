@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { UilCheck, UilTimes, UilInfoCircle } from "@iconscout/react-unicons";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { UilInfoCircle } from "@iconscout/react-unicons";
 
 import Footer from "../components/Footer";
 import * as constant from "../util/constant";
@@ -24,6 +25,7 @@ const Register = () => {
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [errMsg, setErrMsg] = useState('');
 
     // validate username when value changes
@@ -41,6 +43,12 @@ const Register = () => {
     useEffect(() => {
         setErrMsg("");
     }, [username, password, matchPassword])
+
+    // enable button when all validation passed
+    useEffect(() => {
+        if (validUsername && validPassword && validMatch)
+            setButtonDisabled(false);
+    }, [validUsername, validPassword, validMatch])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -74,17 +82,21 @@ const Register = () => {
                     <h1>Register</h1>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Username</Form.Label>
-                            <UilCheck className={validUsername ? "valid" : "hide"} />
-                            <UilTimes className={validUsername || !username ? "hide" : "invalid"} />
-                            <Form.Control
-                                type="text"
-                                placeholder="Username"
-                                onChange={(e) => setUsername(e.target.value)}
-                                value={username}
-                                onFocus={() => setUsernameFocus(true)}
-                                required
-                            />
+                            <FloatingLabel
+                                controlId="floatingInputUsername"
+                                label="Username"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Username"
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    value={username}
+                                    onFocus={() => setUsernameFocus(true)}
+                                    required
+                                    style={{ borderColor: validUsername || !username ? "#CED4DA" : "#FF0000" }}
+                                />
+                            </FloatingLabel>
                             <p className={usernameFocus && username && !validUsername ? "instructions" : "hide"}>
                                 <UilInfoCircle />
                                 4 to 24 characters.<br />
@@ -94,16 +106,20 @@ const Register = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
-                            <UilCheck className={validPassword ? "valid" : "hide"} />
-                            <UilTimes className={validPassword || !password ? "hide" : "invalid"} />
-                            <Form.Control
-                                type="password"
-                                placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
-                                value={password}
-                                onFocus={() => setPasswordFocus(true)}
-                            />
+                            <FloatingLabel
+                                controlId="floatingInputPassword"
+                                label="Password"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Password"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    value={password}
+                                    onFocus={() => setPasswordFocus(true)}
+                                    style={{ borderColor: validPassword || !password ? "#CED4DA" : "#FF0000" }}
+                                />
+                            </FloatingLabel>
                             <p className={passwordFocus && password && !validPassword ? "instructions" : "hide"}>
                                 <UilInfoCircle />
                                 8 to 24 characters.<br />
@@ -113,23 +129,27 @@ const Register = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Confirm Password</Form.Label>
-                            <UilCheck className={validMatch && matchPassword ? "valid" : "hide"} />
-                            <UilTimes className={validMatch || !matchPassword ? "hide" : "invalid"} />
-                            <Form.Control
-                                type="password"
-                                placeholder="Confirm Password"
-                                onChange={(e) => setMatchPassword(e.target.value)}
-                                value={matchPassword}
-                                onFocus={() => setMatchFocus(true)}
-                            />
+                            <FloatingLabel
+                                controlId="floatingInputPassword"
+                                label="Confirm Password"
+                                className="mb-3"
+                            >
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Confirm Password"
+                                    onChange={(e) => setMatchPassword(e.target.value)}
+                                    value={matchPassword}
+                                    onFocus={() => setMatchFocus(true)}
+                                    style={{ borderColor: validMatch || !matchPassword ? "#CED4DA" : "#FF0000" }}
+                                />
+                            </FloatingLabel>
                             <p id="confirmnote" className={matchFocus && matchPassword && !validMatch ? "instructions" : "hide"}>
                                 <UilInfoCircle />
                                 Must match the first password input field.
                             </p>
                         </Form.Group>
 
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" disabled={buttonDisabled}>
                             Register
                         </Button>
 
