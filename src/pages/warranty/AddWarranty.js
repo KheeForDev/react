@@ -58,8 +58,11 @@ const AddWarranty = () => {
 
     // enable button when all fields are filled up
     useEffect(() => {
-        if (warranty.productName !== "" && warranty.warrantyCategory !== "" && warranty.brand !== "" && warranty.model !== "" && warranty.startDate !== "" && warranty.endDate !== "" && warranty.remark !== "")
+        if (warranty.productName !== "" && warranty.warrantyCategory !== "" && warranty.brand !== "" && warranty.model !== "" && warranty.startDate !== "" && warranty.endDate !== "" && warranty.remark !== "") {
             setButtonDisabled(false);
+        } else {
+            setButtonDisabled(true);
+        }
     }, [warranty]);
 
     const handleKeyUp = (e) => {
