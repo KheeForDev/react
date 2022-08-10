@@ -4,7 +4,7 @@ A frontend web application built using React. The function of this web applicati
 # What You Need
 1. IDE - Visual Studio Code (Recommended)
 2. Node.js - Version 16 or later
-3. Backend service - https://github.com/KheeForDev/react/tree/note-keeper-backend (Optional)
+3. Backend service - https://github.com/KheeForDev/react/tree/note-keeper-backend
 
 # How to run
 1. git clone or download project.
