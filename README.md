@@ -6,7 +6,7 @@ A frontend web application built using React. The function of this web applicati
 2. Node.js - Version 16 or later
 3. Backend service - https://github.com/KheeForDev/react/tree/note-keeper-backend
 
-# How to run
+# How To Run
 1. git clone or download project.
 2. Open project using Visual Studio Code.
 3. Open a new terminal. <br/>
