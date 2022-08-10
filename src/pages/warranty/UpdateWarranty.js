@@ -76,7 +76,7 @@ const AddWarranty = () => {
 
     // enable button when all fields are filled up
     useEffect(() => {
-        if (warranty.productName !== "" && warranty.warrantyCategory !== "" && warranty.brand !== "" && warranty.model !== "" && warranty.startDate !== "" && warranty.endDate !== "" && warranty.remark !== "") {
+        if (warranty.productName !== "" && warranty.warrantyCategory !== "" && warranty.brand !== "" && warranty.model !== "" && warranty.startDate !== "" && warranty.endDate !== "") {
             setButtonDisabled(false);
         } else {
             setButtonDisabled(true);
