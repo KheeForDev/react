@@ -21,3 +21,6 @@ Current project is pointing to an API service deployed in Heroku. <br/>
 <img width="486" alt="image" src="https://user-images.githubusercontent.com/52060358/174730623-3e07e826-596c-4a8c-8699-b2fb4f44c641.png"></img>
 
 It can be modified under `src/utils/axios.js` file if there is another backend service or changed in base URL.
+
+# Demo
+https://khee-note-keeper-frontend.herokuapp.com/
