@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 
 import Footer from "../components/Footer";
 import * as constant from "../util/constant";
@@ -18,6 +20,10 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
+    const [showDialog, setShowDialog] = useState(false);
+
+    const handleDialogClose = () => setShowDialog(false);
+    const handleDialogShow = () => setShowDialog(true);
 
     // clear error message when dependencies value change
     useEffect(() => {
@@ -26,6 +32,8 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        handleDialogShow();
 
         try {
             const response = await axios.post(
@@ -41,12 +49,15 @@ const Login = () => {
 
             navigate("/");
         } catch (err) {
+            handleDialogClose();
             setErrMsg(err?.message);
         }
     };
 
     const handleAdminLogin = async (e) => {
         e.preventDefault();
+
+        handleDialogShow();
 
         try {
             const response = await axios.post(
@@ -63,12 +74,15 @@ const Login = () => {
 
             navigate("/");
         } catch (err) {
+            handleDialogClose();
             setErrMsg(err?.message);
         }
     };
 
     const handleUserLogin = async (e) => {
         e.preventDefault();
+
+        handleDialogShow();
 
         try {
             const response = await axios.post(
@@ -85,6 +99,7 @@ const Login = () => {
 
             navigate("/");
         } catch (err) {
+            handleDialogClose();
             setErrMsg(err?.message);
         }
     };
@@ -150,6 +165,21 @@ const Login = () => {
                     </p>
                 </div>
             </div>
+
+            <Modal
+                show={showDialog}
+                onHide={handleDialogClose}
+                backdrop="static"
+                keyboard={false}
+                className="login-modal"
+            >
+                <Modal.Body>
+                    <center>
+                        <Spinner animation="border" />
+                        <h1>Logging in...</h1>
+                    </center>
+                </Modal.Body>
+            </Modal>
 
             <Footer />
         </>
