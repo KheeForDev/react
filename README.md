@@ -14,6 +14,6 @@ A frontend web application built using React. The function of this web applicati
 4. Ensure the terminal working directory is in the project and run `npm install` to download packages and dependencies.
 5. Once download is completed, run `npm start` to start a local node server.
 6. Once the server started, access via `http://localhost:3000` on a web browser.
-7. 
+ 
 # Demo
 https://khee-recollection-frontend.herokuapp.com/login
