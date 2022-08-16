@@ -1,5 +1,13 @@
 # Introduction
-A frontend web application built using React. The function of this web application is to allow user to create a simple note, update and delete existing note.
+A frontend web application built using React.
+
+The web application allows the following:
+- Register an account
+- Login an account
+- Account with user role can perform the following:
+  - Create, view, update and delete warranties
+- Account with admin role can perform the following:
+  - View system configuration
 
 # What You Need
 1. IDE - Visual Studio Code (Recommended)
